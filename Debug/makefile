@@ -11,9 +11,15 @@ RM := rm -rf
 -include sources.mk
 -include startup/subdir.mk
 -include Src/subdir.mk
+-include Drivers/Utilities/Log/subdir.mk
+-include Drivers/Utilities/JPEG/subdir.mk
+-include Drivers/Utilities/Fonts/subdir.mk
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
 -include Drivers/BSP/STM32F769I-Discovery/subdir.mk
 -include Drivers/BSP/Components/wm8994/subdir.mk
+-include Drivers/BSP/Components/otm8009a/subdir.mk
+-include Drivers/BSP/Components/ft6x06/subdir.mk
+-include Drivers/BSP/Components/adv7533/subdir.mk
 -include subdir.mk
 -include objects.mk
 

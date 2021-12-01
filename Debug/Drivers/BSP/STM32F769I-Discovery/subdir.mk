@@ -6,15 +6,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.c \
-../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.c 
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.c \
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.c \
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.c 
 
 OBJS += \
 ./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.o \
-./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.o 
+./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.o \
+./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.o \
+./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o 
 
 C_DEPS += \
 ./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.d \
-./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.d 
+./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.d \
+./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.d \
+./Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
