@@ -1,0 +1,5 @@
+audio.c:11:6:AUDIO_LOOPBACK	8	static
+audio.c:71:7:BSP_AUDIO_OUT_HalfTransfer_CallBack	0	static
+audio.c:82:7:BSP_AUDIO_IN_TransferComplete_CallBack	0	static
+audio.c:93:7:BSP_AUDIO_IN_HalfTransfer_CallBack	0	static
+audio.c:104:7:BSP_AUDIO_IN_Error_CallBack	0	static

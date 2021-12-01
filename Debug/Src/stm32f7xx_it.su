@@ -1,0 +1,2 @@
+stm32f7xx_it.c:59:6:DMA2_Stream4_IRQHandler	8	static
+stm32f7xx_it.c:64:6:DMA2_Stream1_IRQHandler	8	static
