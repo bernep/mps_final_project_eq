@@ -1,3 +1,3 @@
-# mps_final_project_eq
+# FInal Project for Microprocessor Systems - Sound Mixing and Electronic Instrument
 
 Patrick Berne, Eric Segall, Casey Honaker, Charles Pike
