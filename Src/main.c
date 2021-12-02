@@ -41,6 +41,7 @@
 #include "stm32f7xx_hal.h"
 #include "uart.h"
 #include "util.h"
+#include "audio.h"
 #include "bsp_override.h"
 
 
@@ -59,15 +60,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-#ifdef __GNUC__
-/* With GCC, small printf (option LD Linker->Libraries->Small printf
-   set to 'Yes') calls __io_putchar() */
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
-
-
 
 
 
@@ -93,6 +85,8 @@ int main(void)
 
   /* MCU Configuration----------------------------------------------------------*/
 	Sys_Init();
+	UI_Init();
+	  Audio_Init();
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 
@@ -112,18 +106,39 @@ int main(void)
   //BSP_AUDIO_IN_Init(BSP_AUDIO_FREQUENCY_44K, DEFAULT_AUDIO_IN_BIT_RESOLUTION, DEFAULT_AUDIO_IN_CHANNEL_NBR);
   //BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, 50, BSP_AUDIO_FREQUENCY_44K);
 
-  AUDIO_LOOPBACK();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-  /* USER CODE END WHILE */
-	  /* we'll never get this far because of the while(1) in AUDIO_LOOPBACK() */
-  /* USER CODE BEGIN 3 */
+  int fx_state;
 
-  }
+  while (1)
+  	 {
+	  	  //handle UI updates
+	  	  fx_state = UI_Handler();
+
+  		 /* 1st or 2nd half of the record buffer ready for being copied
+  		 to the Playback buffer */
+  		 if (audio_rec_buffer_state != BUFFER_OFFSET_NONE)
+  		 {
+  			 /* Copy half of the record buffer to the playback buffer */
+  			 if (audio_rec_buffer_state == BUFFER_OFFSET_HALF)
+  			 {
+  				 CopyBuffer(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE / 2);
+  			 } else {
+  				 /* if(audio_rec_buffer_state == BUFFER_OFFSET_FULL)*/
+  				 CopyBuffer(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
+  							  &audio_in_buffer[RECORD_BUFFER_SIZE / 2],
+  											RECORD_BUFFER_SIZE / 2);
+  			 }
+  			 /* Wait for next data */
+  			 audio_rec_buffer_state = BUFFER_OFFSET_NONE;
+  		 }
+  		 if (audio_tx_buffer_state)
+  		 {
+  			 audio_tx_buffer_state = 0;
+  		 }
+  	 } // end while(1)
   /* USER CODE END 3 */
 
 }

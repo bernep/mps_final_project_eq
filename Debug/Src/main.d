@@ -47,7 +47,8 @@ Src/main.o: ../Src/main.c ../Inc/main.h ../Inc/init.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/wm8994.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h ../Inc/uart.h \
- ../Inc/uart.h ../Inc/util.h ../Inc/init.h ../Inc/bsp_override.h
+ ../Inc/uart.h ../Inc/util.h ../Inc/init.h ../Inc/audio.h \
+ ../Inc/bsp_override.h ../Inc/bsp_override.h
 
 ../Inc/main.h:
 
@@ -158,5 +159,9 @@ Src/main.o: ../Src/main.c ../Inc/main.h ../Inc/init.h \
 ../Inc/util.h:
 
 ../Inc/init.h:
+
+../Inc/audio.h:
+
+../Inc/bsp_override.h:
 
 ../Inc/bsp_override.h:

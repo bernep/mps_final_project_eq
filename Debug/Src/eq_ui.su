@@ -1,0 +1,16 @@
+eq_ui.c:172:6:UI_Config_SV	8	static
+eq_ui.c:313:10:colorConversion	32	static
+eq_ui.c:321:6:DMA2D_CopyBuffer	64	static
+eq_ui.c:291:6:displayJPEG	24	static
+eq_ui.c:126:6:UI_Config_Main	16	static
+eq_ui.c:51:6:UI_Init	24	static
+eq_ui.c:283:6:Button_Handler	8	static
+eq_ui.c:147:6:UI_Config_FX	24	static
+eq_ui.c:180:5:TouchScreen_Handler	24	static
+eq_ui.c:120:5:UI_Handler	8	static
+eq_ui.c:376:6:JPEG_IRQHandler	8	static
+eq_ui.c:380:6:HAL_JPEG_GetDataCallback	8	static
+eq_ui.c:384:6:HAL_JPEG_DataReadyCallback	8	static
+eq_ui.c:389:6:HAL_JPEG_DecodeCpltCallback	0	static
+eq_ui.c:393:6:HAL_JPEG_ErrorCallback	8	static
+eq_ui.c:409:6:HAL_JPEG_InfoReadyCallback	8	static

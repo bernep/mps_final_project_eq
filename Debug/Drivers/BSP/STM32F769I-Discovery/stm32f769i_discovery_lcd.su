@@ -8,7 +8,7 @@ stm32f769i_discovery_lcd.c:733:6:BSP_LCD_SetXSize	0	static
 stm32f769i_discovery_lcd.c:742:6:BSP_LCD_SetYSize	0	static
 stm32f769i_discovery_lcd.c:754:6:BSP_LCD_LayerDefaultInit	72	static
 stm32f769i_discovery_lcd.c:787:6:BSP_LCD_SelectLayer	0	static
-stm32f769i_discovery_lcd.c:800:6:BSP_LCD_SetLayerVisible	8	static
+stm32f769i_discovery_lcd.c:800:6:BSP_LCD_SetLayerVisible	0	static
 stm32f769i_discovery_lcd.c:820:6:BSP_LCD_SetTransparency	8	static
 stm32f769i_discovery_lcd.c:832:6:BSP_LCD_SetLayerAddress	8	static
 stm32f769i_discovery_lcd.c:847:6:BSP_LCD_SetLayerWindow	24	static

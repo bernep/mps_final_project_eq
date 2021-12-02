@@ -49,14 +49,9 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.o: \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_jpeg.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font8.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font12.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font16.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font20.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font24.c \
  ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/fonts.h \
  ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/font24.c \
+ ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/fonts.h \
  ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/font20.c \
  ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/font16.c \
  ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/font12.c \
@@ -162,21 +157,11 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.o: \
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
 
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font8.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font12.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font16.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font20.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font24.c:
-
 ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/fonts.h:
 
 ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/font24.c:
+
+../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/fonts.h:
 
 ../Drivers/BSP/STM32F769I-Discovery/../../Utilities/Fonts/font20.c:
 

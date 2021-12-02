@@ -1,4 +1,5 @@
 #include "init.h"
+#include "jpeg_utils.h"
 
 /**
   * @brief  System Clock Configuration
@@ -85,6 +86,10 @@ void Sys_Init(void) {
 		- Hardware flow control disabled (RTS and CTS signals)
 	*/
 	initUart(&USB_UART, 115200, USART1);
+
+	/* Initialization for setting up JPEG Color Conversion */
+	JPEG_InitColorTables();
+
 }
 
 // This function is what makes everything work

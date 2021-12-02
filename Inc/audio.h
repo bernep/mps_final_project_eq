@@ -12,10 +12,10 @@
 
 
 volatile uint32_t  audio_rec_buffer_state;
-volatile uint32_t  audio_tx_buffer_state = 0;
+volatile uint32_t  audio_tx_buffer_state;
 
 
-void AUDIO_LOOPBACK(void);
+void Audio_Init(void);
 
 void BSP_AUDIO_OUT_HalfTransfer_CallBack(void);
 void BSP_AUDIO_IN_TransferComplete_CallBack(void);

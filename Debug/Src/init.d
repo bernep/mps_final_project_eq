@@ -46,7 +46,9 @@ Src/init.o: ../Src/init.c ../Inc/init.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/wm8994.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h \
- ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h ../Inc/uart.h
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h ../Inc/uart.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG/jpeg_utils.h \
+ ../Inc/jpeg_utils_conf.h
 
 ../Inc/init.h:
 
@@ -149,3 +151,7 @@ Src/init.o: ../Src/init.c ../Inc/init.h \
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h:
 
 ../Inc/uart.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG/jpeg_utils.h:
+
+../Inc/jpeg_utils_conf.h:

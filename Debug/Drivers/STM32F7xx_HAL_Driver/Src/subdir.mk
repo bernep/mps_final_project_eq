@@ -31,7 +31,9 @@ C_SRCS += \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c \
-../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c 
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c \
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.c \
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.c 
 
 OBJS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.o \
@@ -60,7 +62,9 @@ OBJS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.o \
-./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.o 
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.o \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.o \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.o 
 
 C_DEPS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.d \
@@ -89,10 +93,12 @@ C_DEPS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.d \
-./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.d 
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.d \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.d \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 Drivers/STM32F7xx_HAL_Driver/Src/%.o: ../Drivers/STM32F7xx_HAL_Driver/Src/%.c Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F769xx -c -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Drivers/BSP/STM32F769I-Discovery -Og -ffunction-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F769xx -c -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Drivers/BSP/STM32F769I-Discovery -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/FatFs/src" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers" -Og -ffunction-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 

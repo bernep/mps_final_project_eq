@@ -72,9 +72,9 @@ stm32f7xx_hal_tim.c:3259:19:HAL_TIM_OnePulse_ConfigChannel	48	static
 stm32f7xx_hal_tim.c:5474:6:TIM_ETR_SetConfig	4	static
 stm32f7xx_hal_tim.c:3866:26:HAL_TIM_ConfigOCrefClear	16	static
 stm32f7xx_hal_tim.c:3970:19:HAL_TIM_ConfigClockSource	8	static
-stm32f7xx_hal_tim.c:4159:19:HAL_TIM_SlaveConfigSynchronization	8	static
+stm32f7xx_hal_tim.c:4159:19:HAL_TIM_SlaveConfigSynchro	8	static
 stm32f7xx_hal_tim.c:5034:13:TIM_SlaveTimer_SetConfig	8	static
-stm32f7xx_hal_tim.c:4306:19:HAL_TIM_SlaveConfigSynchronization_IT	16	static
+stm32f7xx_hal_tim.c:4306:19:HAL_TIM_SlaveConfigSynchro_IT	16	static
 stm32f7xx_hal_tim.c:5504:6:TIM_CCxChannelCmd	4	static
 stm32f7xx_hal_tim.c:593:19:HAL_TIM_OC_Start	8	static
 stm32f7xx_hal_tim.c:626:19:HAL_TIM_OC_Stop	8	static

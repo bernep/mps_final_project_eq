@@ -25,8 +25,9 @@ Drivers/BSP/Components/ft6x06 \
 Drivers/BSP/Components/otm8009a \
 Drivers/BSP/Components/wm8994 \
 Drivers/BSP/STM32F769I-Discovery \
+Drivers/FatFs/src \
+Drivers/FatFs/src/drivers \
 Drivers/STM32F7xx_HAL_Driver/Src \
-Drivers/Utilities/Fonts \
 Drivers/Utilities/JPEG \
 Drivers/Utilities/Log \
 Src \

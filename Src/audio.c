@@ -8,7 +8,7 @@
 #include "audio.h"
 
 
-void AUDIO_LOOPBACK(void)
+void Audio_Init(void)
      {
 
 	 /* Initialize Audio Recorder with 4 channels to be used */
@@ -40,30 +40,7 @@ void AUDIO_LOOPBACK(void)
 	 printf("\r\n");
 
 	 audio_rec_buffer_state = BUFFER_OFFSET_NONE;
-	 while (1)
-	 {
-		 /* 1st or 2nd half of the record buffer ready for being copied
-		 to the Playback buffer */
-		 if (audio_rec_buffer_state != BUFFER_OFFSET_NONE)
-		 {
-			 /* Copy half of the record buffer to the playback buffer */
-			 if (audio_rec_buffer_state == BUFFER_OFFSET_HALF)
-			 {
-				 CopyBuffer(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE / 2);
-			 } else {
-				 /* if(audio_rec_buffer_state == BUFFER_OFFSET_FULL)*/
-				 CopyBuffer(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
-							  &audio_in_buffer[RECORD_BUFFER_SIZE / 2],
-											RECORD_BUFFER_SIZE / 2);
-			 }
-			 /* Wait for next data */
-			 audio_rec_buffer_state = BUFFER_OFFSET_NONE;
-		 }
-		 if (audio_tx_buffer_state)
-		 {
-			 audio_tx_buffer_state = 0;
-		 }
-	 } // end while(1)
+
  } // end AUDIO_LOOPBACK
 
 

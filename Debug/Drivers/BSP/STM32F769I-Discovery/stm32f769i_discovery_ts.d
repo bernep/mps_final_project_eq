@@ -50,12 +50,6 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o: \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/../Common/audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font8.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font12.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font16.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font20.c \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font24.c \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/../Common/ts.h
 
@@ -160,18 +154,6 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o: \
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font8.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font12.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font16.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font20.c:
-
-../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font24.c:
 
 ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h:
 
