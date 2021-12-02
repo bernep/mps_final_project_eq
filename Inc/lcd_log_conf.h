@@ -49,7 +49,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f769i_discovery_lcd.h" /* replace 'stm32xxx' with your EVAL board name, ex: stm324x9i_eval_lcd.h */
+
 #include <stdio.h>
+
 
 
 /** @addtogroup LCD_LOG

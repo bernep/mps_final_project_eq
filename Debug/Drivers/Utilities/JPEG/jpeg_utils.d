@@ -36,6 +36,8 @@ Drivers/Utilities/JPEG/jpeg_utils.o: \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_mmc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h \
@@ -117,6 +119,10 @@ Drivers/Utilities/JPEG/jpeg_utils.o: \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_mmc.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 

@@ -56,6 +56,7 @@
 
 #include "../../../Utilities/Fonts/fonts.h"
 
+
 #include <string.h> /* use of memset() */
 
 /** @addtogroup BSP

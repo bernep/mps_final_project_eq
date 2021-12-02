@@ -36,6 +36,8 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o: \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_mmc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h \
@@ -48,6 +50,12 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o: \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/../Common/audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font8.c \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font12.c \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font16.c \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font20.c \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font24.c \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/../Common/ts.h
 
@@ -125,6 +133,10 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o: \
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_mmc.h:
 
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
+
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
@@ -148,6 +160,18 @@ Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.o: \
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font8.c:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font12.c:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font16.c:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font20.c:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/font24.c:
 
 ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h:
 

@@ -35,8 +35,12 @@
   ******************************************************************************
   */
 
+#ifndef __FONTS_12_H
+#define __FONTS_12_H
+
 /* Includes ------------------------------------------------------------------*/
 #include "fonts.h"
+
 
 /** @addtogroup Utilities
   * @{
@@ -1461,4 +1465,5 @@ sFONT Font12 = {
 /**
   * @}
   */  
+#endif
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

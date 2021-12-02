@@ -35,6 +35,8 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_sd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_mmc.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h \
@@ -122,6 +124,10 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_sdmmc.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_mmc.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 
