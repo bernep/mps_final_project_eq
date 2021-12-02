@@ -32,9 +32,10 @@
 void UI_Init();
 void UI_Config_Main();
 void UI_Config_FX();
-int UI_Handler();
-int TouchScreen_Handler();
+int UI_Handler(uint16_t* pData);
 void Button_Handler();
+void SV_Handler(uint16_t* pData);
+int TouchScreen_Handler();
 void displayJPEG(char* fileName, uint32_t xPos, uint32_t yPos);
 uint8_t *colorConversion(uint8_t *jpeg_addr, uint32_t num_bytes);
 void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, JPEG_ConfTypeDef *jpeg_info);

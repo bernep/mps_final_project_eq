@@ -30,19 +30,24 @@ int JPEG_DECODE_COMPLETE = 0;
 
 /* UI Parameters */
 TS_StateTypeDef TS_State;
-GPIO_InitTypeDef GPIO_InitStruct;
 uint32_t xSize_LCD, ySize_LCD, iconSize, iconPosX_FX, iconPosY_FX,
 		 iconPosX_SV, iconPosY_SV, iconPosX_FX1, iconPosY_FX1,
 		 iconPosX_FX2, iconPosY_FX2, iconPosX_FX3, iconPosY_FX3,
-		 iconPosX_FX4, iconPosY_FX4;
-char* iconName_FX = "wilt.jpg";
-char* iconName_SV = "w_ud.jpg";
-char* iconName_FX1 = "wilt.jpg";
-char* iconName_FX2 = "w_ud.jpg";
-char* iconName_FX3 = "wilt.jpg";
-char* iconName_FX4 = "w_ud.jpg";
-int menu_state = 0;;
+		 iconPosX_FX4, iconPosY_FX4, axisPosX_StartLeft, axisPosY_StartTop,
+		 axisScaleX, axisScaleY;
+char* iconName_FX = "note.jpg";
+char* iconName_SV = "sine.jpg";
+char* iconName_FX1 = "note.jpg";
+char* iconName_FX2 = "note.jpg";
+char* iconName_FX3 = "note.jpg";
+char* iconName_FX4 = "note.jpg";
+int menu_state = 0;
 int user_button_pushed = 0;
+
+/* Other Parameters */
+GPIO_InitTypeDef hgpio;
+TIM_HandleTypeDef htim;
+int SV_TIM_TICK = 0;
 
 //
 //
@@ -53,8 +58,6 @@ void UI_Init() {
 	if (FATFS_LinkDriver(&SD_Driver, path) == 0) {
 		if (f_mount(&fs, path, 1) == FR_OK) {
 			if (f_opendir(&dir, path) == FR_OK) {
-				printf("SD Card Initialization Failure\r\n");
-				fflush(stdout);
 				SD_CARD_ENABLED = 1;
 			}
 		}
@@ -86,6 +89,11 @@ void UI_Init() {
 	iconPosY_FX3 = 3*ySize_LCD/4-3*iconSize/4;
 	iconPosX_FX4 = iconPosX_FX2;
 	iconPosY_FX4 = iconPosY_FX3;
+	/* SV Menu */
+	axisPosX_StartLeft = 59;
+	axisPosY_StartTop = 59;
+	axisScaleX = 684;
+	axisScaleY = 362;
 
 	// Initialize JPEG Peripheral
 	__HAL_RCC_JPEG_CLK_ENABLE(); // Enable CLK
@@ -102,10 +110,19 @@ void UI_Init() {
 
 	// User Pushbutton Initialization
 	__HAL_RCC_GPIOA_CLK_ENABLE(); // Enable CLK
-	GPIO_InitStruct.Pin = GPIO_PIN_0;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); // Initialize
+	hgpio.Pin = GPIO_PIN_0;
+	hgpio.Mode = GPIO_MODE_INPUT;
+	hgpio.Pull = GPIO_PULLDOWN;
+	HAL_GPIO_Init(GPIOA, &hgpio); // Initialize
+
+	// Timer Initialization
+	__HAL_RCC_TIM7_CLK_ENABLE(); // Clock Enable
+	htim.Instance = TIM7;
+	htim.Init.Prescaler = 1079U; //108MHz/1080 = 100000Hz
+	htim.Init.Period = 9999U; //100000Hz/10000 = 10Hz
+	HAL_NVIC_EnableIRQ(TIM7_IRQn);
+	HAL_TIM_Base_Init(&htim);
+	HAL_TIM_Base_Start_IT(&htim);
 
 	// Reset Terminal (for Debugging)
 	printf("\033[2J\033[;H\033c");
@@ -117,8 +134,9 @@ void UI_Init() {
 // -- Helper Functions -----
 //
 /* Bundle UI Interaction Functions */
-int UI_Handler() {
+int UI_Handler(uint16_t* pData) {
 	Button_Handler();
+	SV_Handler(pData); // pData must have 4096 entries
 	return TouchScreen_Handler();
 }
 
@@ -138,8 +156,8 @@ void UI_Config_Main() {
 							(uint8_t *)"Signal Viewer", CENTER_MODE);
 	// Display JPEGs (if files are present)
 	if (SD_CARD_ENABLED == 1) {
-		displayJPEG(iconName_FX, iconPosX_FX, iconPosY_FX); // Sound Effects
 		displayJPEG(iconName_SV, iconPosX_SV, iconPosY_SV); // Signal Viewer
+		displayJPEG(iconName_FX, iconPosX_FX, iconPosY_FX); // Sound Effects
 	}
 }
 
@@ -172,8 +190,49 @@ void UI_Config_FX() {
 void UI_Config_SV() {
 	// Clear LCD
 	BSP_LCD_Clear(LCD_COLOR_LIGHTGRAY);
-	// More Stuff
-	BSP_LCD_DisplayStringAt(650, ySize_LCD/2, (uint8_t *)"WIP", CENTER_MODE);
+	// Major Axes
+	for (int i = 1; i < 4; i++) BSP_LCD_DrawHLine(59, 419+i, axisScaleX);
+	for (int i = 1; i < 4; i++) BSP_LCD_DrawVLine(57+i, 49, axisScaleY+10);
+	// Axes Subdivision Lines
+	for (int i = 1; i < 12; i++) BSP_LCD_DrawVLine(60+62*i, 410, 25);
+	for (int i = 0; i < 10; i++) BSP_LCD_DrawHLine(48, 49+37*i, 25);
+}
+
+
+/* Handle User Button Interaction for Each Menu */
+void Button_Handler() {
+	if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1 && menu_state != MAIN_MENU_STATE) {
+		UI_Config_Main(); // Return to Main Menu on Button Press (if outside of main menu)
+		menu_state = MAIN_MENU_STATE;
+	}
+}
+
+/* Handle Signal Viewer Display */
+void SV_Handler(uint16_t* pData) {
+	if (SV_TIM_TICK == 1 && menu_state == SV_MENU_STATE) {
+		// Clear Graph
+		UI_Config_SV();
+		// Set Variables
+		int avg = 0;
+		int prev_y = 0;
+		int inverse_scale_factor = 11;
+		// Display plot lines for data array
+		BSP_LCD_SetTextColor(LCD_COLOR_LIGHTRED);
+		for (int i = 0; i < 4096; i++) {
+			// Average every 6 samples and draw
+			avg += *pData/inverse_scale_factor; // Scale to fit on plot
+			pData++;
+			if (i % 6 == 0) {
+				avg /= 6;
+				if (i > 0) BSP_LCD_DrawLine(axisPosX_StartLeft+i/6, axisPosY_StartTop+prev_y,
+								 axisPosX_StartLeft+i/6+1, axisPosY_StartTop+(axisScaleY-avg));
+				prev_y = axisScaleY-avg;
+				avg = 0;
+			}
+		}
+		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+		SV_TIM_TICK = 0;
+	}
 }
 
 /* Handle Touch Screen Interaction for Each Menu */
@@ -279,14 +338,6 @@ int TouchScreen_Handler() {
 	return fx_selection_state;
 }
 
-/* Handle User Button Interaction for Each Menu */
-void Button_Handler() {
-	if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == 1 && menu_state != MAIN_MENU_STATE) {
-		UI_Config_Main(); // Return to Main Menu on Button Press (if outside of main menu)
-		menu_state = MAIN_MENU_STATE;
-	}
-}
-
 /* Display JPEG at Specified Location */
 void displayJPEG(char* fileName, uint32_t xPos, uint32_t yPos) {
 	f_opendir(&dir, path);
@@ -378,11 +429,12 @@ void JPEG_IRQHandler(void) {
 }
 
 void HAL_JPEG_GetDataCallback(JPEG_HandleTypeDef *hjpeg, uint32_t NbDecodedData) {
+	bzero(jpeg_input_buffer, JPEG_BUFFER_SIZE);
 	HAL_JPEG_ConfigInputBuffer(hjpeg,(uint8_t *)jpeg_input_buffer, JPEG_BUFFER_SIZE);
 }
 
 void HAL_JPEG_DataReadyCallback(JPEG_HandleTypeDef *hjpeg, uint8_t *pDataOut, uint32_t OutDataLength) {
-	OutputBufferAddress += JPEG_BUFFER_SIZE;
+	OutputBufferAddress = JPEG_OUTPUT_DATA_BUFFER;
 	HAL_JPEG_ConfigOutputBuffer(hjpeg, (uint8_t *)jpeg_output_buffer, OutputBufferAddress);
 }
 
@@ -405,7 +457,7 @@ void HAL_JPEG_ErrorCallback(JPEG_HandleTypeDef *hjpeg) {
 	fflush(stdout);
 }
 
-// Adjust the width to be a multiple of 8 or 16 when JPEG header has been parsed
+/* Adjust the width to be a multiple of 8 or 16 when JPEG header has been parsed */
 void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pInfo) {
 	// Have to add padding for DMA2D
 	if(pInfo->ChromaSubsampling == JPEG_420_SUBSAMPLING) {
@@ -435,5 +487,15 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
 	if(JPEG_GetDecodeColorConvertFunc(pInfo, &pConvert_Function, &MCU_TotalNb) != HAL_OK) {
 		printf("Error getting DecodeColorConvertFunct\r\n");
 		while(1);
+	}
+}
+
+void TIM7_IRQHandler(void) {
+	HAL_TIM_IRQHandler(&htim);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	if (htim->Instance == TIM7) {
+		SV_TIM_TICK = 1;
 	}
 }
