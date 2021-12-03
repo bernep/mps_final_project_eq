@@ -7,14 +7,13 @@
 #include "init.h"
 #include "stm32f7xx_hal.h"
 #include "uart.h"
-#include "util.h"
 #include "audio.h"
-#include "eq_ui.h"
 #include "filter.h"
 #include "bsp_override.h"
 #include "stm32f769i_discovery.h"
 #include "stm32f769i_discovery_audio.h"
 #include <string.h>
+#include <ui.h>
 
 //
 //
@@ -22,6 +21,7 @@
 //
 TIM_HandleTypeDef htim;
 int TIM_TICK = 0;
+int fx_state = FX_STATE_NONE;
 
 //
 //
@@ -40,38 +40,56 @@ int main(void) {
 	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 	Audio_Init(); // Initialize Audio Functionality
 
-	/* Test Data */
-	uint16_t* some_random_data[RECORD_BUFFER_SIZE];
-	int fx_state = FX_STATE_NONE;
-
 	/* Main Loop */
 	while (1) {
-		/* 1st or 2nd half of the record buffer ready for being copied
-		to the Playback buffer */
+		/* Handle UI Updates */
+		if (TIM_TICK == 1) {
+			fx_state = UI_Handler((uint16_t*)&audio_out_buffer, fx_state);
+			TIM_TICK = 0;
+		}
+		/* 1st or 2nd half of the record buffer ready for being copied to the Playback buffer */
 		if (audio_rec_buffer_state != BUFFER_OFFSET_NONE)
 		{
 			/* Copy half of the record buffer to the playback buffer */
 			if (audio_rec_buffer_state == BUFFER_OFFSET_HALF)
 			{
-				CopyBuffer(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE / 2);
+				/* Select Sound FX */
+				if (fx_state == FX_STATE_1) {
+					Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[0], RECORD_BUFFER_SIZE/2);
+				} else if (fx_state == FX_STATE_2) {
+					// fx #2
+				} else if (fx_state == FX_STATE_2) {
+					// fx #3
+				} else if (fx_state == FX_STATE_2) {
+					// fx #4
+				}
+				/* Send to Output */
+				memcpy(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE);
 			}
 			else
 			{
-				CopyBuffer(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
-							&audio_in_buffer[RECORD_BUFFER_SIZE / 2],
-											 RECORD_BUFFER_SIZE / 2);\
+				/* Select Sound FX */
+				if (fx_state == FX_STATE_1) {
+					Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+				} else if (fx_state == FX_STATE_2) {
+					// fx #2
+				} else if (fx_state == FX_STATE_2) {
+					// fx #3
+				} else if (fx_state == FX_STATE_2) {
+					// fx #4
+				}
+				/* Send to Output */
+				memcpy(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
+					   &audio_in_buffer[RECORD_BUFFER_SIZE / 2],
+					   RECORD_BUFFER_SIZE);
 			}
 			/* Wait for next data */
 			audio_rec_buffer_state = BUFFER_OFFSET_NONE;
 		}
+		/* Reset audio flag */
 		if (audio_tx_buffer_state)
 		{
 			audio_tx_buffer_state = 0;
-		}
-		// Handle UI Updates
-		if (TIM_TICK == 1) {
-			fx_state = UI_Handler(&audio_out_buffer);
-			TIM_TICK = 0;
 		}
 	}
 }

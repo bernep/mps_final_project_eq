@@ -6,6 +6,7 @@
  */
 
 #include "audio.h"
+#include "filter.h"
 
 
 void Audio_Init(void)
@@ -30,7 +31,7 @@ void Audio_Init(void)
 
 	 printf("Copying Record buffer to Playback buffer\r\n");
 
-	 /* Play the recorded buffer */
+	 /* Play the Recorded buffer */
 	 if (_BSP_AUDIO_OUT_Play((uint16_t *) &audio_out_buffer[0], RECORD_BUFFER_SIZE) == AUDIO_OK)
 	 {
 		 printf("Audio output OK\r\n");
