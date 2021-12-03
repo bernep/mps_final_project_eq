@@ -30,6 +30,7 @@ int JPEG_DECODE_COMPLETE = 0;
 
 /* UI Parameters */
 TS_StateTypeDef TS_State;
+GPIO_InitTypeDef hgpio;
 uint32_t xSize_LCD, ySize_LCD, iconSize, iconPosX_FX, iconPosY_FX,
 		 iconPosX_SV, iconPosY_SV, iconPosX_FX1, iconPosY_FX1,
 		 iconPosX_FX2, iconPosY_FX2, iconPosX_FX3, iconPosY_FX3,
@@ -43,11 +44,6 @@ char* iconName_FX3 = "note.jpg";
 char* iconName_FX4 = "note.jpg";
 int menu_state = 0;
 int user_button_pushed = 0;
-
-/* Other Parameters */
-GPIO_InitTypeDef hgpio;
-TIM_HandleTypeDef htim;
-int SV_TIM_TICK = 0;
 
 //
 //
@@ -114,15 +110,6 @@ void UI_Init() {
 	hgpio.Mode = GPIO_MODE_INPUT;
 	hgpio.Pull = GPIO_PULLDOWN;
 	HAL_GPIO_Init(GPIOA, &hgpio); // Initialize
-
-	// Timer Initialization
-	__HAL_RCC_TIM7_CLK_ENABLE(); // Clock Enable
-	htim.Instance = TIM7;
-	htim.Init.Prescaler = 1079U; //108MHz/1080 = 100000Hz
-	htim.Init.Period = 3333U; //100000Hz/100000 = 1Hz
-	HAL_NVIC_EnableIRQ(TIM7_IRQn);
-	HAL_TIM_Base_Init(&htim);
-	HAL_TIM_Base_Start_IT(&htim);
 
 	// Reset Terminal (for Debugging)
 	printf("\033[2J\033[;H\033c");
@@ -209,7 +196,7 @@ void Button_Handler() {
 
 /* Handle Signal Viewer Display */
 void SV_Handler(uint16_t* pData) {
-	if (SV_TIM_TICK == 1 && menu_state == SV_MENU_STATE) {
+	if (menu_state == SV_MENU_STATE) {
 		// Clear Graph
 		UI_Config_SV();
 		// Set Variables
@@ -231,7 +218,6 @@ void SV_Handler(uint16_t* pData) {
 			}
 		}
 		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-		SV_TIM_TICK = 0;
 	}
 }
 
@@ -483,15 +469,5 @@ void HAL_JPEG_InfoReadyCallback(JPEG_HandleTypeDef *hjpeg, JPEG_ConfTypeDef *pIn
 	if(JPEG_GetDecodeColorConvertFunc(pInfo, &pConvert_Function, &MCU_TotalNb) != HAL_OK) {
 		printf("Error getting DecodeColorConvertFunct\r\n");
 		while(1);
-	}
-}
-
-void TIM7_IRQHandler(void) {
-	HAL_TIM_IRQHandler(&htim);
-}
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	if (htim->Instance == TIM7) {
-		SV_TIM_TICK = 1;
 	}
 }
