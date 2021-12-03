@@ -119,7 +119,7 @@ void UI_Init() {
 	__HAL_RCC_TIM7_CLK_ENABLE(); // Clock Enable
 	htim.Instance = TIM7;
 	htim.Init.Prescaler = 1079U; //108MHz/1080 = 100000Hz
-	htim.Init.Period = 9999U; //100000Hz/10000 = 10Hz
+	htim.Init.Period = 3333U; //100000Hz/100000 = 1Hz
 	HAL_NVIC_EnableIRQ(TIM7_IRQn);
 	HAL_TIM_Base_Init(&htim);
 	HAL_TIM_Base_Start_IT(&htim);
@@ -215,7 +215,7 @@ void SV_Handler(uint16_t* pData) {
 		// Set Variables
 		int avg = 0;
 		int prev_y = 0;
-		int inverse_scale_factor = 11;
+		int inverse_scale_factor = 88;
 		// Display plot lines for data array
 		BSP_LCD_SetTextColor(LCD_COLOR_LIGHTRED);
 		for (int i = 0; i < 4096; i++) {
@@ -243,84 +243,80 @@ int TouchScreen_Handler() {
 	BSP_TS_GetState(&TS_State);
 	if (TS_State.touchDetected == 1) {
 		/* Wait for touch released */
-		while(TS_State.touchDetected > 0) {
-		    BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-		    BSP_TS_GetState(&TS_State);
-		    /* Main Menu */
-		    if (menu_state == MAIN_MENU_STATE) {
-		    	/* Detect Icon Touches and Indicate with Rectangle Highlight */
-			    if ((TS_State.touchX[0] > iconPosX_FX) && (TS_State.touchX[0] < iconPosX_FX+iconSize) &&
-				    (TS_State.touchY[0] > iconPosY_FX) && (TS_State.touchY[0] < iconPosY_FX+iconSize))
-			    {
-				    BSP_LCD_DrawRect(iconPosX_FX - 10, iconPosY_FX - 10, iconSize + 20, iconSize + 20);
-				    menu_selection_state = 1;
-			    }
-			    else if ((TS_State.touchX[0] > iconPosX_SV) && (TS_State.touchX[0] < iconPosX_SV+iconSize) &&
-			  	    (TS_State.touchY[0] > iconPosY_SV) && (TS_State.touchY[0] < iconPosY_SV+iconSize))
-			    {
-				    BSP_LCD_DrawRect(iconPosX_SV - 10, iconPosY_SV - 10, iconSize + 20, iconSize + 20);
-				    menu_selection_state = 2;
-			    }
-			    else
-			    {
-					BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-					BSP_LCD_DrawRect(iconPosX_FX - 10, iconPosY_FX - 10, iconSize + 20, iconSize + 20);
-				    BSP_LCD_DrawRect(iconPosX_SV - 10, iconPosY_SV - 10, iconSize + 20, iconSize + 20);
-				    menu_selection_state = 0;
-			    }
-		    }
-		    /* FX Menu */
-		    else if (menu_state == FX_MENU_STATE) {
-				/* Detect Icon Touches and Indicate with Rectangle Highlight */
-				if ((TS_State.touchX[0] > iconPosX_FX1) && (TS_State.touchX[0] < iconPosX_FX1+iconSize) &&
-					(TS_State.touchY[0] > iconPosY_FX1) && (TS_State.touchY[0] < iconPosY_FX1+iconSize))
-				{
-					BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-					BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-					fx_selection_state = FX_STATE_1;
-				}
-				else if ((TS_State.touchX[0] > iconPosX_FX2) && (TS_State.touchX[0] < iconPosX_FX2+iconSize) &&
-						(TS_State.touchY[0] > iconPosY_FX2) && (TS_State.touchY[0] < iconPosY_FX2+iconSize))
-				{
-					BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-					BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-					fx_selection_state = FX_STATE_2;
-				}
-				else if ((TS_State.touchX[0] > iconPosX_FX3) && (TS_State.touchX[0] < iconPosX_FX3+iconSize) &&
-						(TS_State.touchY[0] > iconPosY_FX3) && (TS_State.touchY[0] < iconPosY_FX3+iconSize))
-				{
-					BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-					BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-					fx_selection_state = FX_STATE_3;
-				}
-				else if ((TS_State.touchX[0] > iconPosX_FX4) && (TS_State.touchX[0] < iconPosX_FX4+iconSize) &&
-						(TS_State.touchY[0] > iconPosY_FX4) && (TS_State.touchY[0] < iconPosY_FX4+iconSize))
-				{
-					BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-					BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-					fx_selection_state = FX_STATE_4;
-				}
-				else
-				{
-					BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
-					BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-					BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-					fx_selection_state = FX_STATE_NONE;
-				}
+		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+		BSP_TS_GetState(&TS_State);
+		/* Main Menu */
+		if (menu_state == MAIN_MENU_STATE) {
+			/* Detect Icon Touches and Indicate with Rectangle Highlight */
+			if ((TS_State.touchX[0] > iconPosX_FX) && (TS_State.touchX[0] < iconPosX_FX+iconSize) &&
+				(TS_State.touchY[0] > iconPosY_FX) && (TS_State.touchY[0] < iconPosY_FX+iconSize))
+			{
+				menu_selection_state = 1;
+			}
+			else if ((TS_State.touchX[0] > iconPosX_SV) && (TS_State.touchX[0] < iconPosX_SV+iconSize) &&
+				(TS_State.touchY[0] > iconPosY_SV) && (TS_State.touchY[0] < iconPosY_SV+iconSize))
+			{
+				menu_selection_state = 2;
+			}
+			else
+			{
+				BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
+				BSP_LCD_DrawRect(iconPosX_FX - 10, iconPosY_FX - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_SV - 10, iconPosY_SV - 10, iconSize + 20, iconSize + 20);
+				menu_selection_state = 0;
+			}
+		}
+		/* FX Menu */
+		else if (menu_state == FX_MENU_STATE) {
+			/* Detect Icon Touches and Indicate with Rectangle Highlight */
+			if ((TS_State.touchX[0] > iconPosX_FX1) && (TS_State.touchX[0] < iconPosX_FX1+iconSize) &&
+				(TS_State.touchY[0] > iconPosY_FX1) && (TS_State.touchY[0] < iconPosY_FX1+iconSize))
+			{
+				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
+				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
+				fx_selection_state = FX_STATE_1;
+			}
+			else if ((TS_State.touchX[0] > iconPosX_FX2) && (TS_State.touchX[0] < iconPosX_FX2+iconSize) &&
+					(TS_State.touchY[0] > iconPosY_FX2) && (TS_State.touchY[0] < iconPosY_FX2+iconSize))
+			{
+				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
+				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
+				fx_selection_state = FX_STATE_2;
+			}
+			else if ((TS_State.touchX[0] > iconPosX_FX3) && (TS_State.touchX[0] < iconPosX_FX3+iconSize) &&
+					(TS_State.touchY[0] > iconPosY_FX3) && (TS_State.touchY[0] < iconPosY_FX3+iconSize))
+			{
+				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
+				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
+				fx_selection_state = FX_STATE_3;
+			}
+			else if ((TS_State.touchX[0] > iconPosX_FX4) && (TS_State.touchX[0] < iconPosX_FX4+iconSize) &&
+					(TS_State.touchY[0] > iconPosY_FX4) && (TS_State.touchY[0] < iconPosY_FX4+iconSize))
+			{
+				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
+				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
+				fx_selection_state = FX_STATE_4;
+			}
+			else
+			{
+				BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
+				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
+				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
+				fx_selection_state = FX_STATE_NONE;
 			}
 		}
 		/* Open New Menu if Option was Selected */
