@@ -47,8 +47,27 @@ Src/main.o: ../Src/main.c ../Inc/main.h ../Inc/init.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/wm8994.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h ../Inc/uart.h \
- ../Inc/uart.h ../Inc/util.h ../Inc/init.h ../Inc/audio.h \
- ../Inc/bsp_override.h ../Inc/bsp_override.h
+ ../Inc/uart.h ../Inc/usb.h ../Inc/audio.h ../Inc/bsp_override.h \
+ ../Inc/filter.h ../Inc/init.h ../Inc/bsp_override.h ../Inc/ui.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/otm8009a/otm8009a.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/adv7533.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/../Common/audio.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/../Common/ts.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff_gen_drv.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/diskio.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/integer.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff.h \
+ ../Inc/ffconf.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers/sd_diskio.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sd.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG/jpeg_utils.h \
+ ../Inc/jpeg_utils_conf.h
 
 ../Inc/main.h:
 
@@ -156,12 +175,54 @@ Src/main.o: ../Src/main.c ../Inc/main.h ../Inc/init.h \
 
 ../Inc/uart.h:
 
-../Inc/util.h:
-
-../Inc/init.h:
+../Inc/usb.h:
 
 ../Inc/audio.h:
 
 ../Inc/bsp_override.h:
 
+../Inc/filter.h:
+
+../Inc/init.h:
+
 ../Inc/bsp_override.h:
+
+../Inc/ui.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/otm8009a/otm8009a.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/adv7533.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/../Common/audio.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/../Common/ts.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff_gen_drv.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/diskio.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/integer.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff.h:
+
+../Inc/ffconf.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers/sd_diskio.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sd.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG/jpeg_utils.h:
+
+../Inc/jpeg_utils_conf.h:

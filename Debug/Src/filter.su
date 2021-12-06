@@ -1,0 +1,2 @@
+filter.c:109:5:Calc_FX1_Sample	0	static
+filter.c:103:6:Calc_FX1_Buffer	16	static

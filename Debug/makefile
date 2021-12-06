@@ -13,6 +13,8 @@ RM := rm -rf
 -include Src/subdir.mk
 -include Drivers/Utilities/Log/subdir.mk
 -include Drivers/Utilities/JPEG/subdir.mk
+-include Drivers/STM32_USB_Device_Library/Core/Src/subdir.mk
+-include Drivers/STM32_USB_Device_Library/Class/AUDIO/Src/subdir.mk
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
 -include Drivers/FatFs/src/drivers/subdir.mk
 -include Drivers/FatFs/src/subdir.mk

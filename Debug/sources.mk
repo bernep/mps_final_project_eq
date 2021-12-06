@@ -28,6 +28,8 @@ Drivers/BSP/STM32F769I-Discovery \
 Drivers/FatFs/src \
 Drivers/FatFs/src/drivers \
 Drivers/STM32F7xx_HAL_Driver/Src \
+Drivers/STM32_USB_Device_Library/Class/AUDIO/Src \
+Drivers/STM32_USB_Device_Library/Core/Src \
 Drivers/Utilities/JPEG \
 Drivers/Utilities/Log \
 Src \

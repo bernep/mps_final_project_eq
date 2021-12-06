@@ -1,5 +1,6 @@
-audio.c:11:6:Audio_Init	8	static
-audio.c:48:7:BSP_AUDIO_OUT_HalfTransfer_CallBack	0	static
-audio.c:59:7:BSP_AUDIO_IN_TransferComplete_CallBack	0	static
-audio.c:70:7:BSP_AUDIO_IN_HalfTransfer_CallBack	0	static
-audio.c:81:7:BSP_AUDIO_IN_Error_CallBack	0	static
+audio.c:14:6:USB_Audio_Init	0	static
+audio.c:25:6:Line_Audio_Init	8	static
+audio.c:64:7:BSP_AUDIO_OUT_HalfTransfer_CallBack	0	static
+audio.c:75:7:BSP_AUDIO_IN_TransferComplete_CallBack	0	static
+audio.c:86:7:BSP_AUDIO_IN_HalfTransfer_CallBack	0	static
+audio.c:97:6:BSP_AUDIO_IN_Error_CallBack	0	static

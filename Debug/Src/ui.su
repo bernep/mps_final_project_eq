@@ -1,0 +1,17 @@
+ui.c:177:6:UI_Config_SV	8	static
+ui.c:198:6:SV_Handler	24	static
+ui.c:358:10:colorConversion	32	static
+ui.c:366:6:DMA2D_CopyBuffer	64	static
+ui.c:336:6:displayJPEG	24	static
+ui.c:131:6:UI_Config_Main	16	static
+ui.c:52:6:UI_Init	24	static
+ui.c:190:6:Button_Handler	8	static
+ui.c:152:6:UI_Config_FX	24	static
+ui.c:225:5:TouchScreen_Handler	24	static
+ui.c:124:5:UI_Handler	16	static
+ui.c:421:6:JPEG_IRQHandler	8	static
+ui.c:425:6:HAL_JPEG_GetDataCallback	16	static
+ui.c:430:6:HAL_JPEG_DataReadyCallback	8	static
+ui.c:435:6:HAL_JPEG_DecodeCpltCallback	0	static
+ui.c:439:6:HAL_JPEG_ErrorCallback	8	static
+ui.c:455:6:HAL_JPEG_InfoReadyCallback	8	static
