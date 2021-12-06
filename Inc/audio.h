@@ -11,11 +11,11 @@
 #include "bsp_override.h"
 
 
-volatile uint32_t  audio_rec_buffer_state;
-volatile uint32_t  audio_tx_buffer_state;
+volatile uint32_t  audio_line_in_buffer_state;
+volatile uint32_t  audio_line_out_buffer_state;
 
-
-void Audio_Init(void);
+void USB_Audio_Init(void);
+void Line_Audio_Init(void);
 
 void BSP_AUDIO_OUT_HalfTransfer_CallBack(void);
 void BSP_AUDIO_IN_TransferComplete_CallBack(void);

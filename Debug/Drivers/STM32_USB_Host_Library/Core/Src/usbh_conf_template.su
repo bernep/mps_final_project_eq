@@ -1,0 +1,15 @@
+usbh_conf_template.c:29:21:USBH_LL_Init	0	static
+usbh_conf_template.c:43:21:USBH_LL_DeInit	0	static
+usbh_conf_template.c:57:21:USBH_LL_Start	0	static
+usbh_conf_template.c:71:21:USBH_LL_Stop	0	static
+usbh_conf_template.c:85:19:USBH_LL_GetSpeed	0	static
+usbh_conf_template.c:101:20:USBH_LL_ResetPort	0	static
+usbh_conf_template.c:116:10:USBH_LL_GetLastXferSize	0	static
+usbh_conf_template.c:137:22:USBH_LL_OpenPipe	0	static
+usbh_conf_template.c:164:22:USBH_LL_ClosePipe	0	static
+usbh_conf_template.c:202:22:USBH_LL_SubmitURB	0	static
+usbh_conf_template.c:239:23:USBH_LL_GetURBState	0	static
+usbh_conf_template.c:259:21:USBH_LL_DriverVBUS	0	static
+usbh_conf_template.c:277:22:USBH_LL_SetToggle	0	static
+usbh_conf_template.c:294:10:USBH_LL_GetToggle	0	static
+usbh_conf_template.c:310:7:USBH_Delay	0	static

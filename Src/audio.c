@@ -7,10 +7,22 @@
 
 #include "audio.h"
 #include "filter.h"
+#include "usb.h"
 
 
-void Audio_Init(void)
-     {
+
+void USB_Audio_Init(void){
+
+
+}
+
+
+/*
+ * Line Audio Initalizaionts
+ */
+
+
+void Line_Audio_Init(void) {
 
 	 /* Initialize Audio Recorder with 4 channels to be used */
 	 if (BSP_AUDIO_IN_OUT_Init(BSP_AUDIO_FREQUENCY_48K) == AUDIO_OK)
@@ -40,15 +52,18 @@ void Audio_Init(void)
 	 }
 	 printf("\r\n");
 
-	 audio_rec_buffer_state = BUFFER_OFFSET_NONE;
+	 audio_line_in_buffer_state = BUFFER_OFFSET_NONE;
 
- } // end AUDIO_LOOPBACK
+ }
 
 
+/*
+ * Line Audio Callbacks
+ */
 
  void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
  {
-	 audio_tx_buffer_state = 1;
+	 audio_line_out_buffer_state = 1;
  }
 
 
@@ -59,7 +74,7 @@ void Audio_Init(void)
    */
  void BSP_AUDIO_IN_TransferComplete_CallBack(void)
  {
-	 audio_rec_buffer_state = BUFFER_OFFSET_FULL;
+	 audio_line_in_buffer_state = BUFFER_OFFSET_FULL;
  }
 
 
@@ -70,7 +85,7 @@ void Audio_Init(void)
    */
  void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
  {
-	 audio_rec_buffer_state = BUFFER_OFFSET_HALF;
+	 audio_line_in_buffer_state = BUFFER_OFFSET_HALF;
  }
 
 
@@ -79,24 +94,6 @@ void Audio_Init(void)
    * @param  None
    * @retval None
    */
- void BSP_AUDIO_IN_Error_CallBack(void)
- {
-	 /* This function is called when an Interrupt due to transfer error on or peripheral
-		error occurs. */
-	 /* Display message on the LCD screen */
-	 //BSP_LCD_SetBackColor(LCD_COLOR_RED);
-	 //BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"       DMA  ERROR     ", CENTER_MODE);
-
-
-	 /* Stop the program with an infinite loop */
-
-	 /*
-	 while (BSP_PB_GetState(BUTTON_WAKEUP) != RESET)
-	 {
-		 return;
-	 }
-	 */
-
-	 /* could also generate a system reset to recover from the error */
-	 /* .... */
+void BSP_AUDIO_IN_Error_CallBack(void){
+	/* handle errors */
  }

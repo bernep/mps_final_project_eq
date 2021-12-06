@@ -45,7 +45,10 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/wm8994.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h \
- ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h \
+ ../Inc/filter.h \
+ ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h ../Inc/init.h \
+ ../Inc/uart.h ../Inc/usb.h
 
 ../Inc/audio.h:
 
@@ -146,3 +149,13 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
 ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h:
 
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h:
+
+../Inc/filter.h:
+
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h:
+
+../Inc/init.h:
+
+../Inc/uart.h:
+
+../Inc/usb.h:

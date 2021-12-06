@@ -7,6 +7,7 @@
 #include "init.h"
 #include "stm32f7xx_hal.h"
 #include "uart.h"
+#include "usb.h"
 #include "audio.h"
 #include "filter.h"
 #include "bsp_override.h"
@@ -26,6 +27,7 @@ int usb_state = USB_STATE_OFF;
 int sv_state = SV_STATE_SCOPE;
 Struct ui_data;
 
+#define USB_DEVICE_ENABLE
 //
 //
 // -- Function Prototypes --
@@ -41,7 +43,9 @@ int main(void) {
 	Sys_Init(); // Initialize STM32 System
 	Timer_Init(); // Initialize Program Timer
 	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
-	Audio_Init(); // Initialize Audio Functionality
+
+	Line_Audio_Init(); // Initialize Audio Functionality
+	//USB_Audio_Init();
 
 	/* Main Loop */
 	while (1) {
@@ -53,11 +57,13 @@ int main(void) {
 			sv_state = ui_data.sv_selection_state;
 			TIM_TICK = 0;
 		}
+
+
 		/* 1st or 2nd half of the record buffer ready for being copied to the Playback buffer */
-		if (audio_rec_buffer_state != BUFFER_OFFSET_NONE)
+		if (audio_line_in_buffer_state != BUFFER_OFFSET_NONE)
 		{
 			/* Copy half of the record buffer to the playback buffer */
-			if (audio_rec_buffer_state == BUFFER_OFFSET_HALF)
+			if (audio_line_in_buffer_state == BUFFER_OFFSET_HALF)
 			{
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
@@ -98,12 +104,12 @@ int main(void) {
 				}
 			}
 			/* Wait for next data */
-			audio_rec_buffer_state = BUFFER_OFFSET_NONE;
+			audio_line_in_buffer_state = BUFFER_OFFSET_NONE;
 		}
 		/* Reset audio flag */
-		if (audio_tx_buffer_state)
+		if (audio_line_out_buffer_state)
 		{
-			audio_tx_buffer_state = 0;
+			audio_line_out_buffer_state = 0;
 		}
 	}
 }
