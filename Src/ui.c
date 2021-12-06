@@ -38,10 +38,10 @@ uint32_t xSize_LCD, ySize_LCD, iconSize, iconPosX_FX, iconPosY_FX,
 		 axisScaleX, axisScaleY;
 char* iconName_FX = "note.jpg";
 char* iconName_SV = "sine.jpg";
-char* iconName_FX1 = "note.jpg";
-char* iconName_FX2 = "note.jpg";
-char* iconName_FX3 = "note.jpg";
-char* iconName_FX4 = "note.jpg";
+char* iconName_FX1 = "lpf.jpg";
+char* iconName_FX2 = "hpf.jpg";
+char* iconName_FX3 = "comp.jpg";
+char* iconName_FX4 = "wilt.jpg";
 int menu_state = 0;
 int user_button_pushed = 0;
 
@@ -121,10 +121,18 @@ void UI_Init() {
 // -- Helper Functions -----
 //
 /* Bundle UI Interaction Functions */
-Struct UI_Handler(uint16_t* pData, uint16_t fx_state_current, uint16_t usb_state_current) {
+Struct UI_Handler(uint16_t* pData, uint16_t fx_state_current,
+				  uint16_t usb_state_current, uint16_t sv_state_current) {
 	Button_Handler();
-	SV_Handler(pData); // pData must have 4096 entries
-	return TouchScreen_Handler(fx_state_current, usb_state_current);
+	SV_Handler(pData, sv_state_current); // pData must have 4096 entries
+	Struct ui_data = TouchScreen_Handler(fx_state_current, usb_state_current, sv_state_current);
+	/* Update Main Menu with USB Info */
+	if (ui_data.usb_selection_state == USB_STATE_ON && menu_state == MAIN_MENU_STATE) {
+		BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+		BSP_LCD_FillRect(xSize_LCD-80+iconSize/16, 30+iconSize/16, 3*iconSize/8, 3*iconSize/8);
+	}
+	/* Return Data */
+	return ui_data;
 }
 
 /* Display Main UI Screen */
@@ -163,10 +171,10 @@ void UI_Config_FX() {
 	BSP_LCD_FillRect(iconPosX_FX4, iconPosY_FX4, iconSize, iconSize);
 	// Text
 	BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-	BSP_LCD_DisplayStringAt(650, iconPosY_FX1+iconSize+20, (uint8_t *)"FX1", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(150, iconPosY_FX2+iconSize+20, (uint8_t *)"FX2", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(650, iconPosY_FX3+iconSize+20, (uint8_t *)"FX3", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(150, iconPosY_FX4+iconSize+20, (uint8_t *)"FX4", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(650, iconPosY_FX1+iconSize+20, (uint8_t *)"Low Pass Filter", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(150, iconPosY_FX2+iconSize+20, (uint8_t *)"High Pass Filter", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(650, iconPosY_FX3+iconSize+20, (uint8_t *)"Compressor", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(150, iconPosY_FX4+iconSize+20, (uint8_t *)"Wacky", CENTER_MODE);
 	// Display JPEGs (if files are present)
 	if (SD_CARD_ENABLED == 1) {
 		displayJPEG(iconName_FX1, iconPosX_FX1, iconPosY_FX1);
@@ -177,7 +185,7 @@ void UI_Config_FX() {
 }
 
 /* Display Signal Viewer Screen */
-void UI_Config_SV() {
+void UI_Config_SV(uint16_t sv_state) {
 	// Clear LCD
 	BSP_LCD_Clear(LCD_COLOR_LIGHTGRAY);
 	// Major Axes
@@ -186,8 +194,14 @@ void UI_Config_SV() {
 	// Axes Subdivision Lines
 	for (int i = 1; i < 12; i++) BSP_LCD_DrawVLine(60+62*i, 410, 25);
 	for (int i = 0; i < 10; i++) BSP_LCD_DrawHLine(48, 49+37*i, 25);
+	// Axes Labels
+	BSP_LCD_DisplayStringAt(430, ySize_LCD-30, (uint8_t *)"0", CENTER_MODE);
+	if (sv_state == SV_STATE_SCOPE) {
+		BSP_LCD_DisplayStringAt(350, ySize_LCD-30, (uint8_t *)"4096", CENTER_MODE);
+	} else if (sv_state == SV_STATE_SPECTRUM) {
+		BSP_LCD_DisplayStringAt(350, ySize_LCD-30, (uint8_t *)"20kHz", CENTER_MODE);
+	}
 }
-
 
 /* Handle User Button Interaction for Each Menu */
 void Button_Handler() {
@@ -198,10 +212,10 @@ void Button_Handler() {
 }
 
 /* Handle Signal Viewer Display */
-void SV_Handler(uint16_t* pData) {
+void SV_Handler(uint16_t* pData, uint16_t sv_state) {
 	if (menu_state == SV_MENU_STATE) {
 		// Clear Graph
-		UI_Config_SV();
+		UI_Config_SV(sv_state);
 		// Set Variables
 		int avg = 0;
 		int prev_y = 0;
@@ -225,11 +239,12 @@ void SV_Handler(uint16_t* pData) {
 }
 
 /* Handle Touch Screen Interaction for Each Menu */
-Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current) {
+Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current, uint16_t sv_state_current) {
 	int menu_selection_state = 0;
 	Struct ui_data;
 	ui_data.fx_selection_state = fx_state_current;
 	ui_data.usb_selection_state = usb_state_current;
+	ui_data.sv_selection_state = sv_state_current;
 	/* Check for Initial Touch */
 	BSP_TS_GetState(&TS_State);
 	if (TS_State.touchDetected == 1) {
@@ -324,6 +339,16 @@ Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current
 				ui_data.fx_selection_state = FX_STATE_NONE;
 			}
 		}
+		/* SV Menu */
+		else if (menu_state == SV_MENU_STATE) {
+			if (sv_state_current == SV_STATE_SCOPE) {
+				ui_data.sv_selection_state = SV_STATE_SPECTRUM;
+			}
+			else if (sv_state_current == SV_STATE_SPECTRUM) {
+				ui_data.sv_selection_state = SV_STATE_SCOPE;
+			}
+			HAL_Delay(100);
+		}
 		/* Open New Menu if Option was Selected */
 		if (menu_selection_state == 1) { // FX Menu
 			UI_Config_FX();
@@ -342,7 +367,7 @@ Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current
 			}
 			BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
 		} else if (menu_selection_state == 2) { // Signal Viewer
-			UI_Config_SV();
+			UI_Config_SV(SV_STATE_SCOPE);
 			menu_state = SV_MENU_STATE;
 			ui_data.fx_selection_state = fx_state_current;
 		}
@@ -368,6 +393,8 @@ void displayJPEG(char* fileName, uint32_t xPos, uint32_t yPos) {
 	// Print Image on LCD
 	DMA2D_CopyBuffer((uint32_t *)raw_output, (uint32_t *)LCD_FRAME_BUFFER,
 					 xPos, yPos, &jpeg_info);
+	// Close file
+	f_close(&file);
 }
 
 //

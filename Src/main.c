@@ -22,7 +22,8 @@
 TIM_HandleTypeDef htim;
 int TIM_TICK = 0;
 int fx_state = FX_STATE_NONE;
-int usb_state = 0;
+int usb_state = USB_STATE_OFF;
+int sv_state = SV_STATE_SCOPE;
 Struct ui_data;
 
 //
@@ -46,9 +47,10 @@ int main(void) {
 	while (1) {
 		/* Handle UI Updates */
 		if (TIM_TICK == 1) {
-			ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state);
+			ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
 			fx_state = ui_data.fx_selection_state;
 			usb_state = ui_data.usb_selection_state;
+			sv_state = ui_data.sv_selection_state;
 			TIM_TICK = 0;
 		}
 		/* 1st or 2nd half of the record buffer ready for being copied to the Playback buffer */
