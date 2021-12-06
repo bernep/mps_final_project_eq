@@ -7,8 +7,9 @@
 
 #include "audio.h"
 #include "filter.h"
+#include "usbd_audio.h"
 #include "usb.h"
-
+#include "ui.h"
 
 
 void USB_Audio_Init(void){
@@ -57,36 +58,60 @@ void Line_Audio_Init(void) {
  }
 
 
-/*
- * Line Audio Callbacks
- */
+/**
+  * @brief Manages the DMA Transfer complete interrupt.
+  * @param None
+  * @retval None
+  */
+void BSP_AUDIO_IN_TransferComplete_CallBack(void)
+{
+	if(ui_data.usb_selection_state == USB_STATE_OFF){
+		 audio_line_in_buffer_state = BUFFER_OFFSET_FULL;
+	} else {
 
- void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
- {
-	 audio_line_out_buffer_state = 1;
- }
-
-
- /**
-   * @brief Manages the DMA Transfer complete interrupt.
-   * @param None
-   * @retval None
-   */
- void BSP_AUDIO_IN_TransferComplete_CallBack(void)
- {
-	 audio_line_in_buffer_state = BUFFER_OFFSET_FULL;
- }
+	}
+}
 
 
- /**
-   * @brief  Manages the DMA Half Transfer complete interrupt.
-   * @param  None
-   * @retval None
-   */
- void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
- {
+/**
+  * @brief  Manages the DMA Half Transfer complete interrupt.
+  * @param  None
+  * @retval None
+  */
+void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
+{
 	 audio_line_in_buffer_state = BUFFER_OFFSET_HALF;
- }
+}
+
+
+/**
+  * @brief  Manages the DMA full Transfer complete event.
+  * @param  None
+  * @retval None
+  */
+void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
+{
+	if(ui_data.usb_selection_state == USB_STATE_OFF){
+		 audio_line_out_buffer_state = BUFFER_OFFSET_FULL;
+	} else {
+		USBD_AUDIO_Sync(&husbd, AUDIO_OFFSET_FULL);
+
+	}
+}
+
+/**
+  * @brief  Manages the DMA Half Transfer complete event.
+  * @param  None
+  * @retval None
+  */
+void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
+{
+	if(ui_data.usb_selection_state == USB_STATE_OFF){
+		 audio_line_out_buffer_state = BUFFER_OFFSET_FULL;
+	} else {
+		USBD_AUDIO_Sync(&husbd, AUDIO_OFFSET_HALF);
+	}
+}
 
 
  /**

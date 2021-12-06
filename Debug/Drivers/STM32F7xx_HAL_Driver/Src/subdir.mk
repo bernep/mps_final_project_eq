@@ -21,6 +21,8 @@ C_SRCS += \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc_ex.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_mmc.c \
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pcd.c \
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pcd_ex.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c \
@@ -52,6 +54,8 @@ OBJS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc_ex.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_mmc.o \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pcd.o \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pcd_ex.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.o \
@@ -83,6 +87,8 @@ C_DEPS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_ltdc_ex.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_mmc.d \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pcd.d \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pcd_ex.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.d \

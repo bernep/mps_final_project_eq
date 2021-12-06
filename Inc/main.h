@@ -41,6 +41,7 @@
 /* Includes ------------------------------------------------------------------*/
 
 /* USER CODE BEGIN Includes */
+#define USB_DEVICE_ENABLE
 
 /* USER CODE END Includes */
 

@@ -1,6 +1,11 @@
 //--------------------------------
 // Final Project - User Interface
 //--------------------------------
+
+
+#ifndef UI_H_
+#define UI_H_
+
 /* Includes */
 #include "stm32f769xx.h"
 #include "stm32f7xx_hal.h"
@@ -35,10 +40,13 @@
 #define JPEG_BUFFER_SIZE 		((uint32_t)(64 * 1024))
 
 /* Struct Definition */
-struct ui_data {
+struct ui_data_struct {
 	int fx_selection_state, usb_selection_state, sv_selection_state;
 };
-typedef struct ui_data Struct;
+typedef struct ui_data_struct Struct;
+
+Struct ui_data;
+
 
 /* Function Prototypes */
 void UI_Init();
@@ -52,3 +60,6 @@ Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current
 void displayJPEG(char* fileName, uint32_t xPos, uint32_t yPos);
 uint8_t *colorConversion(uint8_t *jpeg_addr, uint32_t num_bytes);
 void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, JPEG_ConfTypeDef *jpeg_info);
+
+
+#endif

@@ -39,6 +39,9 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dsi.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_jpeg.h \
@@ -48,7 +51,36 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h \
  ../Inc/filter.h \
  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h ../Inc/init.h \
- ../Inc/uart.h ../Inc/usb.h
+ ../Inc/uart.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Class/AUDIO/Inc/usbd_audio.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
+ ../Inc/usbd_conf.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
+ ../Inc/usb.h ../Inc/usbd_conf.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
+ ../Inc/ui.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/otm8009a/otm8009a.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/adv7533.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/../Common/audio.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h \
+ ../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/../Common/ts.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff_gen_drv.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/diskio.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/integer.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff.h \
+ ../Inc/ffconf.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers/sd_diskio.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sd.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG/jpeg_utils.h \
+ ../Inc/jpeg_utils_conf.h
 
 ../Inc/audio.h:
 
@@ -136,6 +168,12 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
 
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h:
+
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dsi.h:
@@ -158,4 +196,62 @@ Src/audio.o: ../Src/audio.c ../Inc/audio.h ../Inc/bsp_override.h \
 
 ../Inc/uart.h:
 
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Class/AUDIO/Inc/usbd_audio.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+
+../Inc/usbd_conf.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
+
 ../Inc/usb.h:
+
+../Inc/usbd_conf.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
+
+../Inc/ui.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/otm8009a/otm8009a.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/adv7533.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/adv7533/../Common/audio.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sdram.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy/../../../Utilities/Fonts/fonts.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_ts.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_lcd.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/ft6x06.h:
+
+../Drivers/BSP/STM32F769I-Discovery/../Components/ft6x06/../Common/ts.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff_gen_drv.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/diskio.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/integer.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/ff.h:
+
+../Inc/ffconf.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers/sd_diskio.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_sd.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG/jpeg_utils.h:
+
+../Inc/jpeg_utils_conf.h:

@@ -14,7 +14,7 @@
 #include "stm32f769i_discovery.h"
 #include "stm32f769i_discovery_audio.h"
 #include <string.h>
-#include <ui.h>
+#include "ui.h"
 
 //
 //
@@ -23,11 +23,9 @@
 TIM_HandleTypeDef htim;
 int TIM_TICK = 0;
 int fx_state = FX_STATE_NONE;
-int usb_state = USB_STATE_OFF;
 int sv_state = SV_STATE_SCOPE;
-Struct ui_data;
+int usb_state = USB_STATE_OFF;
 
-#define USB_DEVICE_ENABLE
 //
 //
 // -- Function Prototypes --
@@ -137,3 +135,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		TIM_TICK = 1;
 	}
 }
+
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

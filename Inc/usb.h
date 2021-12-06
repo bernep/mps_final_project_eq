@@ -8,10 +8,13 @@
 #ifndef USB_H_
 #define USB_H_
 
+#include "init.h"
 
 
 #ifdef USB_DEVICE_ENABLE
 
+#include "usbd_conf.h"
+#include "usbd_core.h"
 
 USBD_ClassTypeDef husbd;
 

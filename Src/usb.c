@@ -7,17 +7,17 @@
 #include "usb.h"
 
 
-
-
 #ifdef USB_DEVICE_ENABLE
 
+#include "usbd_desc.h"
+#include "usbd_audio.h"
 
 void USBD_Setup(){
 
 	// Application Initializations
 	printf("\033[2J\033[HInitialize USBH\r\n");
 	fflush(stdout);
-	USBD_Init(&husbd, USBD_UserProcess, 0);
+	USBD_Init(&husbd, &AUDIO_Desc, 0);
 
 	// USBH Driver Initialization
 	printf("Registering Class\r\n");
@@ -32,34 +32,6 @@ void USBD_Setup(){
 
 }
 
-void USBD_UserProcess(USBD_HandleTypeDef *phost, uint8_t id) {
-	switch (id)
-	{
-		case DEVICE_USER_DISCONNECTION:
-
-			usbh_state = HOST_USER_DISCONNECTION;
-			break;
-
-			/* when HOST_USER_CLASS_ACTIVE event is received, application can start
-  	  communication with device*/
-		case HOST_USER_CLASS_ACTIVE:
-			if(phost->pActiveClass->ClassCode == USB_HID_DEVICE){
-				usbh_device_type = USB_HID_DEVICE;
-			} else if (phost->pActiveClass->ClassCode == USB_MSC_DEVICE) {
-				usbh_device_type = USB_MSC_DEVICE;
-			}
-			usbh_state = HOST_USER_CLASS_ACTIVE;
-			usbh_driver_status = USB_DRIVER_INACTIVE;
-			break;
-
-
-		case HOST_USER_CONNECTION:
-			usbh_state = HOST_USER_CONNECTION;
-			break;
-		default:
-			break;
-	}
-}
 
 
 #endif

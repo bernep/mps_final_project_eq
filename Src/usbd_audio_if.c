@@ -1,201 +1,167 @@
 /**
   ******************************************************************************
-  * @file    usbd_cdc_if_template.c
+  * @file    USB_Device/AUDIO_Standalone/Src/usbd_audio_if.c
   * @author  MCD Application Team
-  * @brief   Generic media access Layer.
+  * @brief   USB Device Audio interface file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2015 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                      www.st.com/SLA0044
+  * Redistribution and use in source and binary forms, with or without 
+  * modification, are permitted, provided that the following conditions are met:
+  *
+  * 1. Redistribution of source code must retain the above copyright notice, 
+  *    this list of conditions and the following disclaimer.
+  * 2. Redistributions in binary form must reproduce the above copyright notice,
+  *    this list of conditions and the following disclaimer in the documentation
+  *    and/or other materials provided with the distribution.
+  * 3. Neither the name of STMicroelectronics nor the names of other 
+  *    contributors to this software may be used to endorse or promote products 
+  *    derived from this software without specific written permission.
+  * 4. This software, including modifications and/or derivative works of this 
+  *    software, must execute solely and exclusively on microcontroller or
+  *    microprocessor devices manufactured by or for STMicroelectronics.
+  * 5. Redistribution and use of this software other than as permitted under 
+  *    this license is void and will automatically terminate your rights under 
+  *    this license. 
+  *
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
 
-/* BSPDependencies
-- "stm32xxxxx_{eval}{discovery}.c"
-- "stm32xxxxx_{eval}{discovery}_io.c"
-- "stm32xxxxx_{eval}{discovery}_audio.c"
-EndBSPDependencies */
-
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_audio_if.h"
+#include "stm32f769i_discovery_audio.h"
 
-/** @addtogroup STM32_USB_DEVICE_LIBRARY
-  * @{
-  */
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+static int8_t Audio_Init(uint32_t AudioFreq, uint32_t Volume, uint32_t options);
+static int8_t Audio_DeInit(uint32_t options);
+static int8_t Audio_PlaybackCmd(uint8_t* pbuf, uint32_t size, uint8_t cmd);
+static int8_t Audio_VolumeCtl(uint8_t vol);
+static int8_t Audio_MuteCtl(uint8_t cmd);
+static int8_t Audio_PeriodicTC(uint8_t *pbuf, uint32_t size, uint8_t cmd);
+static int8_t Audio_GetState(void);
 
-
-/** @defgroup USBD_AUDIO
-  * @brief usbd core module
-  * @{
-  */
-
-/** @defgroup USBD_AUDIO_Private_TypesDefinitions
-  * @{
-  */
-/**
-  * @}
-  */
-
-
-/** @defgroup USBD_AUDIO_Private_Defines
-  * @{
-  */
-/**
-  * @}
-  */
-
-
-/** @defgroup USBD_AUDIO_Private_Macros
-  * @{
-  */
-
-/**
-  * @}
-  */
-
-
-/** @defgroup USBD_AUDIO_Private_FunctionPrototypes
-  * @{
-  */
-
-static int8_t  TEMPLATE_Init(uint32_t  AudioFreq, uint32_t Volume, uint32_t options);
-static int8_t  TEMPLATE_DeInit(uint32_t options);
-static int8_t  TEMPLATE_AudioCmd(uint8_t *pbuf, uint32_t size, uint8_t cmd);
-static int8_t  TEMPLATE_VolumeCtl(uint8_t vol);
-static int8_t  TEMPLATE_MuteCtl(uint8_t cmd);
-static int8_t  TEMPLATE_PeriodicTC(uint8_t *pbuf, uint32_t size, uint8_t cmd);
-static int8_t  TEMPLATE_GetState(void);
-
-USBD_AUDIO_ItfTypeDef USBD_AUDIO_Template_fops =
-{
-  TEMPLATE_Init,
-  TEMPLATE_DeInit,
-  TEMPLATE_AudioCmd,
-  TEMPLATE_VolumeCtl,
-  TEMPLATE_MuteCtl,
-  TEMPLATE_PeriodicTC,
-  TEMPLATE_GetState,
+/* Private variables ---------------------------------------------------------*/
+extern USBD_HandleTypeDef USBD_Device;
+USBD_AUDIO_ItfTypeDef USBD_AUDIO_fops = {
+  Audio_Init,
+  Audio_DeInit,
+  Audio_PlaybackCmd,
+  Audio_VolumeCtl,
+  Audio_MuteCtl,
+  Audio_PeriodicTC,
+  Audio_GetState,
 };
 
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  TEMPLATE_Init
-  *         Initializes the AUDIO media low layer
-  * @param  None
+  * @brief  Initializes the AUDIO media low layer.
+  * @param  AudioFreq: Audio frequency used to play the audio stream.
+  * @param  Volume: Initial volume level (from 0 (Mute) to 100 (Max))
+  * @param  options: Reserved for future use 
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_Init(uint32_t  AudioFreq, uint32_t Volume, uint32_t options)
+static int8_t Audio_Init(uint32_t  AudioFreq, uint32_t Volume, uint32_t options)
 {
-  UNUSED(AudioFreq);
-  UNUSED(Volume);
-  UNUSED(options);
-
-  /*
-     Add your initialization code here
-  */
-  return (0);
+  BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, Volume, AudioFreq);
+  
+  /* Update the Audio frame slot configuration to match the PCM standard instead of TDM */
+  BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
+  
+  return 0;
 }
 
 /**
-  * @brief  TEMPLATE_DeInit
-  *         DeInitializes the AUDIO media low layer
-  * @param  None
+  * @brief  De-Initializes the AUDIO media low layer.      
+  * @param  options: Reserved for future use
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_DeInit(uint32_t options)
+static int8_t Audio_DeInit(uint32_t options)
 {
-  UNUSED(options);
-
-  /*
-     Add your deinitialization code here
-  */
-  return (0);
+  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+  return 0;
 }
 
-
 /**
-  * @brief  TEMPLATE_AudioCmd
-  *         AUDIO command handler
-  * @param  Buf: Buffer of data to be sent
+  * @brief  Handles AUDIO command.        
+  * @param  pbuf: Pointer to buffer of data to be sent
   * @param  size: Number of data to be sent (in bytes)
-  * @param  cmd: command opcode
+  * @param  cmd: Command opcode
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_AudioCmd(uint8_t *pbuf, uint32_t size, uint8_t cmd)
+static int8_t Audio_PlaybackCmd(uint8_t *pbuf, uint32_t size, uint8_t cmd)
 {
-  UNUSED(pbuf);
-  UNUSED(size);
-  UNUSED(cmd);
-
-  return (0);
+  switch(cmd)
+  {
+  case AUDIO_CMD_START:
+    BSP_AUDIO_OUT_Play((uint16_t *)pbuf, 2*size);
+    break;
+  
+  case AUDIO_CMD_PLAY:
+    BSP_AUDIO_OUT_ChangeBuffer((uint16_t *)pbuf, 2*size);
+    break;
+  }
+  return 0;
 }
 
 /**
-  * @brief  TEMPLATE_VolumeCtl
-  * @param  vol: volume level (0..100)
+  * @brief  Controls AUDIO Volume.             
+  * @param  vol: Volume level (0..100)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_VolumeCtl(uint8_t vol)
+static int8_t Audio_VolumeCtl(uint8_t vol)
 {
-  UNUSED(vol);
-
-  return (0);
+  BSP_AUDIO_OUT_SetVolume(vol);
+  return 0;
 }
 
 /**
-  * @brief  TEMPLATE_MuteCtl
-  * @param  cmd: vmute command
+  * @brief  Controls AUDIO Mute.              
+  * @param  cmd: Command opcode
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_MuteCtl(uint8_t cmd)
+static int8_t Audio_MuteCtl(uint8_t cmd)
 {
-  UNUSED(cmd);
-
-  return (0);
+  BSP_AUDIO_OUT_SetMute(cmd);
+  return 0;
 }
 
 /**
-  * @brief  TEMPLATE_PeriodicTC
-  * @param  cmd
+  * @brief  Audio_PeriodicTC              
+  * @param  cmd: Command opcode
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_PeriodicTC(uint8_t *pbuf, uint32_t size, uint8_t cmd)
+static int8_t Audio_PeriodicTC(uint8_t *pbuf, uint32_t size, uint8_t cmd)
 {
-  UNUSED(pbuf);
-  UNUSED(size);
-  UNUSED(cmd);
-
-  return (0);
+  return 0;
 }
 
 /**
-  * @brief  TEMPLATE_GetState
+  * @brief  Gets AUDIO State.              
   * @param  None
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t TEMPLATE_GetState(void)
+static int8_t Audio_GetState(void)
 {
-  return (0);
+  return 0;
 }
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

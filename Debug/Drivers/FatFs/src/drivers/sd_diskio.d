@@ -46,6 +46,9 @@ Drivers/FatFs/src/drivers/sd_diskio.o: \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dsi.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_jpeg.h
@@ -145,6 +148,12 @@ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspac
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
+
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h:
 

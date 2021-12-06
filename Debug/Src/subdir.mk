@@ -14,7 +14,10 @@ C_SRCS += \
 ../Src/system_stm32f7xx.c \
 ../Src/uart.c \
 ../Src/ui.c \
-../Src/usb.c 
+../Src/usb.c \
+../Src/usbd_audio_if.c \
+../Src/usbd_conf.c \
+../Src/usbd_desc.c 
 
 OBJS += \
 ./Src/audio.o \
@@ -26,7 +29,10 @@ OBJS += \
 ./Src/system_stm32f7xx.o \
 ./Src/uart.o \
 ./Src/ui.o \
-./Src/usb.o 
+./Src/usb.o \
+./Src/usbd_audio_if.o \
+./Src/usbd_conf.o \
+./Src/usbd_desc.o 
 
 C_DEPS += \
 ./Src/audio.d \
@@ -38,7 +44,10 @@ C_DEPS += \
 ./Src/system_stm32f7xx.d \
 ./Src/uart.d \
 ./Src/ui.d \
-./Src/usb.d 
+./Src/usb.d \
+./Src/usbd_audio_if.d \
+./Src/usbd_conf.d \
+./Src/usbd_desc.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
