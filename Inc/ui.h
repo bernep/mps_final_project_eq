@@ -23,19 +23,29 @@
 #define FX_STATE_2 				2
 #define FX_STATE_3 				3
 #define FX_STATE_4 				4
+// -- USB STATE -- //
+#define USB_STATE_OFF			0
+#define USB_STATE_ON			1
 // -- JPEG Definitions -- //
 #define LCD_FRAME_BUFFER        0xC0000000
 #define JPEG_OUTPUT_DATA_BUFFER 0xC0200000
 #define JPEG_BUFFER_SIZE 		((uint32_t)(64 * 1024))
 
+/* Struct Definition */
+struct ui_data {
+	int fx_selection_state;
+	int usb_selection_state;
+};
+typedef struct ui_data Struct;
+
 /* Function Prototypes */
 void UI_Init();
 void UI_Config_Main();
 void UI_Config_FX();
-int UI_Handler(uint16_t* pData, uint16_t fx_state_current);
+Struct UI_Handler(uint16_t* pData, uint16_t fx_state_current, uint16_t usb_state_current);
 void Button_Handler();
 void SV_Handler(uint16_t* pData);
-int TouchScreen_Handler(uint16_t fx_state_current);
+Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current);
 void displayJPEG(char* fileName, uint32_t xPos, uint32_t yPos);
 uint8_t *colorConversion(uint8_t *jpeg_addr, uint32_t num_bytes);
 void DMA2D_CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, JPEG_ConfTypeDef *jpeg_info);

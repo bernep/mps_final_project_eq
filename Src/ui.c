@@ -121,10 +121,10 @@ void UI_Init() {
 // -- Helper Functions -----
 //
 /* Bundle UI Interaction Functions */
-int UI_Handler(uint16_t* pData, uint16_t fx_state_current) {
+Struct UI_Handler(uint16_t* pData, uint16_t fx_state_current, uint16_t usb_state_current) {
 	Button_Handler();
 	SV_Handler(pData); // pData must have 4096 entries
-	return TouchScreen_Handler(fx_state_current);
+	return TouchScreen_Handler(fx_state_current, usb_state_current);
 }
 
 /* Display Main UI Screen */
@@ -135,12 +135,15 @@ void UI_Config_Main() {
 	BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
 	BSP_LCD_FillRect(iconPosX_FX, iconPosY_SV, iconSize, iconSize);
 	BSP_LCD_FillRect(iconPosX_SV, iconPosY_SV, iconSize, iconSize);
+	BSP_LCD_FillRect(xSize_LCD-80, 30, iconSize/2, iconSize/2);
 	// Text
 	BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
 	BSP_LCD_DisplayStringAt(650, ySize_LCD/2 + 3*iconSize/4,
 							(uint8_t *)"Sound Effects", CENTER_MODE);
 	BSP_LCD_DisplayStringAt(150, ySize_LCD/2 + 3*iconSize/4,
 							(uint8_t *)"Signal Viewer", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(275, 45,
+							(uint8_t *)"USB:", CENTER_MODE);
 	// Display JPEGs (if files are present)
 	if (SD_CARD_ENABLED == 1) {
 		displayJPEG(iconName_SV, iconPosX_SV, iconPosY_SV); // Signal Viewer
@@ -222,9 +225,11 @@ void SV_Handler(uint16_t* pData) {
 }
 
 /* Handle Touch Screen Interaction for Each Menu */
-int TouchScreen_Handler(uint16_t fx_state_current) {
+Struct TouchScreen_Handler(uint16_t fx_state_current, uint16_t usb_state_current) {
 	int menu_selection_state = 0;
-	int fx_selection_state = fx_state_current;
+	Struct ui_data;
+	ui_data.fx_selection_state = fx_state_current;
+	ui_data.usb_selection_state = usb_state_current;
 	/* Check for Initial Touch */
 	BSP_TS_GetState(&TS_State);
 	if (TS_State.touchDetected == 1) {
@@ -251,6 +256,20 @@ int TouchScreen_Handler(uint16_t fx_state_current) {
 				BSP_LCD_DrawRect(iconPosX_SV - 10, iconPosY_SV - 10, iconSize + 20, iconSize + 20);
 				menu_selection_state = 0;
 			}
+			if ((TS_State.touchX[0] > xSize_LCD-160) && (TS_State.touchX[0] < (xSize_LCD-80)+iconSize) &&
+				(TS_State.touchY[0] > 0) && (TS_State.touchY[0] < 30+iconSize))
+			{
+				if (ui_data.usb_selection_state == USB_STATE_OFF) {
+					BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+					BSP_LCD_FillRect(xSize_LCD-80+iconSize/16, 30+iconSize/16, 3*iconSize/8, 3*iconSize/8);
+					ui_data.usb_selection_state = USB_STATE_ON;
+				} else {
+					BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+					BSP_LCD_FillRect(xSize_LCD-80, 30, iconSize/2, iconSize/2);
+					ui_data.usb_selection_state = USB_STATE_OFF;
+				}
+				HAL_Delay(200);
+			}
 		}
 		/* FX Menu */
 		else if (menu_state == FX_MENU_STATE) {
@@ -263,7 +282,7 @@ int TouchScreen_Handler(uint16_t fx_state_current) {
 				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-				fx_selection_state = FX_STATE_1;
+				ui_data.fx_selection_state = FX_STATE_1;
 			}
 			else if ((TS_State.touchX[0] > iconPosX_FX2) && (TS_State.touchX[0] < iconPosX_FX2+iconSize) &&
 					(TS_State.touchY[0] > iconPosY_FX2) && (TS_State.touchY[0] < iconPosY_FX2+iconSize))
@@ -273,7 +292,7 @@ int TouchScreen_Handler(uint16_t fx_state_current) {
 				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-				fx_selection_state = FX_STATE_2;
+				ui_data.fx_selection_state = FX_STATE_2;
 			}
 			else if ((TS_State.touchX[0] > iconPosX_FX3) && (TS_State.touchX[0] < iconPosX_FX3+iconSize) &&
 					(TS_State.touchY[0] > iconPosY_FX3) && (TS_State.touchY[0] < iconPosY_FX3+iconSize))
@@ -283,7 +302,7 @@ int TouchScreen_Handler(uint16_t fx_state_current) {
 				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-				fx_selection_state = FX_STATE_3;
+				ui_data.fx_selection_state = FX_STATE_3;
 			}
 			else if ((TS_State.touchX[0] > iconPosX_FX4) && (TS_State.touchX[0] < iconPosX_FX4+iconSize) &&
 					(TS_State.touchY[0] > iconPosY_FX4) && (TS_State.touchY[0] < iconPosY_FX4+iconSize))
@@ -293,7 +312,7 @@ int TouchScreen_Handler(uint16_t fx_state_current) {
 				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-				fx_selection_state = FX_STATE_4;
+				ui_data.fx_selection_state = FX_STATE_4;
 			}
 			else
 			{
@@ -302,34 +321,34 @@ int TouchScreen_Handler(uint16_t fx_state_current) {
 				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
 				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
-				fx_selection_state = FX_STATE_NONE;
+				ui_data.fx_selection_state = FX_STATE_NONE;
 			}
 		}
 		/* Open New Menu if Option was Selected */
 		if (menu_selection_state == 1) { // FX Menu
 			UI_Config_FX();
 			menu_state = FX_MENU_STATE;
-			fx_selection_state = fx_state_current;
+			ui_data.fx_selection_state = fx_state_current;
 			/* Show Selection Rectangle Again */
 			BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-			if (fx_selection_state == FX_STATE_1) {
+			if (ui_data.fx_selection_state == FX_STATE_1) {
 				BSP_LCD_DrawRect(iconPosX_FX1 - 10, iconPosY_FX1 - 10, iconSize + 20, iconSize + 20);
-			} else if (fx_selection_state == FX_STATE_2) {
+			} else if (ui_data.fx_selection_state == FX_STATE_2) {
 				BSP_LCD_DrawRect(iconPosX_FX2 - 10, iconPosY_FX2 - 10, iconSize + 20, iconSize + 20);
-			} else if (fx_selection_state == FX_STATE_3) {
+			} else if (ui_data.fx_selection_state == FX_STATE_3) {
 				BSP_LCD_DrawRect(iconPosX_FX3 - 10, iconPosY_FX3 - 10, iconSize + 20, iconSize + 20);
-			} else if (fx_selection_state == FX_STATE_4) {
+			} else if (ui_data.fx_selection_state == FX_STATE_4) {
 				BSP_LCD_DrawRect(iconPosX_FX4 - 10, iconPosY_FX4 - 10, iconSize + 20, iconSize + 20);
 			}
 			BSP_LCD_SetTextColor(LCD_COLOR_LIGHTGRAY);
 		} else if (menu_selection_state == 2) { // Signal Viewer
 			UI_Config_SV();
 			menu_state = SV_MENU_STATE;
-			fx_selection_state = fx_state_current;
+			ui_data.fx_selection_state = fx_state_current;
 		}
 	}
 	/* Return FX State */
-	return fx_selection_state;
+	return ui_data;
 }
 
 /* Display JPEG at Specified Location */
