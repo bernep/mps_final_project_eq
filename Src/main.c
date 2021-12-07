@@ -42,10 +42,10 @@ int main(void) {
 	Timer_Init(); // Initialize Program Timer
 	//UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 
-	//Line_Audio_Init(); // Initialize Audio Functionality
-	USB_Audio_Init();
-	usb_state = USB_STATE_ON;
-	ui_data.usb_selection_state = USB_STATE_ON;
+	Line_Audio_Init(); // Initialize Audio Functionality
+	//USB_Audio_Init();
+	//usb_state = USB_STATE_ON;
+	//ui_data.usb_selection_state = USB_STATE_ON;
 
 	/* Main Loop */
 	while (1) {
@@ -67,7 +67,7 @@ int main(void) {
 			{
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[0], RECORD_BUFFER_SIZE/2);
+					//Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[0], RECORD_BUFFER_SIZE/2);
 				} else if (fx_state == FX_STATE_2) {
 					// fx #2
 				} else if (fx_state == FX_STATE_2) {
@@ -86,7 +86,7 @@ int main(void) {
 			{
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+					//Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
 				} else if (fx_state == FX_STATE_2) {
 					// fx #2
 				} else if (fx_state == FX_STATE_2) {
