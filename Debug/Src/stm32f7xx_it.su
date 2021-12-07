@@ -1,2 +1,4 @@
-stm32f7xx_it.c:60:6:DMA2_Stream4_IRQHandler	8	static
-stm32f7xx_it.c:65:6:DMA2_Stream1_IRQHandler	8	static
+stm32f7xx_it.c:63:6:DMA2_Stream4_IRQHandler	8	static
+stm32f7xx_it.c:68:6:DMA2_Stream1_IRQHandler	8	static
+stm32f7xx_it.c:79:6:OTG_HS_IRQHandler	8	static
+stm32f7xx_it.c:90:6:DMA2_Stream6_IRQHandler	8	static

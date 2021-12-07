@@ -31,7 +31,7 @@ void USBD_Setup(){
 
 	// USB Driver Class Registrations: Add device types to handle.
 	// Start USBH Driver
-	printf("Starting USB Host\r\n");
+	printf("Starting USB Device\r\n");
 	fflush(stdout);
 	USBD_Start(&USBD_Device);
 

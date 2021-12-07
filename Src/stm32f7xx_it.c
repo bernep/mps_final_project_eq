@@ -35,9 +35,12 @@
 #include "stm32f7xx.h"
 #include "stm32f7xx_it.h"
 #include "bsp_override.h"
+#include "usbd_conf.h"
 
 
 /* USER CODE BEGIN 0 */
+extern PCD_HandleTypeDef hpcd;
+extern SAI_HandleTypeDef haudio_out_sai;
 
 /* USER CODE END 0 */
 
@@ -68,6 +71,28 @@ void DMA2_Stream1_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+
+
+#ifdef USE_USB_FS
+void OTG_FS_IRQHandler(void)
+#else
+void OTG_HS_IRQHandler(void)
+#endif
+{
+  HAL_PCD_IRQHandler(&hpcd);
+}
+
+/**
+  * @brief This function handles DMA2 Stream 5 interrupt request.
+  * @param None
+  * @retval None
+  */
+void DMA2_Stream6_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
+}
+
+
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

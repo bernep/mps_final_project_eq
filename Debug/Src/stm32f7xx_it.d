@@ -50,7 +50,8 @@ Src/stm32f7xx_it.o: ../Src/stm32f7xx_it.c \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/wm8994.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h \
- ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h \
+ ../Inc/usbd_conf.h
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 
@@ -159,3 +160,5 @@ Src/stm32f7xx_it.o: ../Src/stm32f7xx_it.c \
 ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h:
 
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h:
+
+../Inc/usbd_conf.h:

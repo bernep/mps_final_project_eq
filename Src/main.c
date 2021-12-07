@@ -40,18 +40,18 @@ int main(void) {
 	/* Initialization */
 	Sys_Init(); // Initialize STM32 System
 	Timer_Init(); // Initialize Program Timer
-	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
+	//UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 
-	Line_Audio_Init(); // Initialize Audio Functionality
-	//USB_Audio_Init();
-	//usb_state = USB_STATE_ON;
-	//ui_data.usb_selection_state = USB_STATE_ON;
+	//Line_Audio_Init(); // Initialize Audio Functionality
+	USB_Audio_Init();
+	usb_state = USB_STATE_ON;
+	ui_data.usb_selection_state = USB_STATE_ON;
 
 	/* Main Loop */
 	while (1) {
 		/* Handle UI Updates */
 		if (TIM_TICK == 1) {
-			ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
+			//ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
 			fx_state = ui_data.fx_selection_state;
 			usb_state = ui_data.usb_selection_state;
 			sv_state = ui_data.sv_selection_state;

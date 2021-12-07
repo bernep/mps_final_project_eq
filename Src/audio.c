@@ -9,10 +9,11 @@
 #include "filter.h"
 #include "usb.h"
 #include "ui.h"
-
+#include "usbd_audio.h"
 
 void USB_Audio_Init(void){
 	USBD_Setup();
+
 }
 
 
