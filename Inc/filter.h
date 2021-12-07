@@ -8,5 +8,7 @@
 #include <stdlib.h>
 
 /* Function Prototypes */
-void Calc_FX1_Buffer(uint16_t* pBuffer, uint16_t Buffer_Size);
-int Calc_FX1_Sample(int inSample);
+void FX1(uint16_t* pBufferFilt, uint16_t* pBuffer, uint16_t Buffer_Size);
+void FX2(uint16_t* pBufferFilt, uint16_t* pBuffer, uint16_t Buffer_Size);
+void FX3(uint16_t* pBufferFilt, uint16_t* pBuffer, uint16_t Buffer_Size);
+void FX4(uint16_t* pBufferFilt, uint16_t* pBuffer, uint16_t Buffer_Size);
