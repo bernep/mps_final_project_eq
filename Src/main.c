@@ -40,8 +40,7 @@ int main(void) {
 	/* Initialization */
 	Sys_Init(); // Initialize STM32 System
 	Timer_Init(); // Initialize Program Timer
-	//UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
-
+	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 	Line_Audio_Init(); // Initialize Audio Functionality
 	//USB_Audio_Init();
 	//usb_state = USB_STATE_ON;
@@ -51,7 +50,7 @@ int main(void) {
 	while (1) {
 		/* Handle UI Updates */
 		if (TIM_TICK == 1) {
-			//ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
+			ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
 			fx_state = ui_data.fx_selection_state;
 			usb_state = ui_data.usb_selection_state;
 			sv_state = ui_data.sv_selection_state;
@@ -65,40 +64,57 @@ int main(void) {
 			/* Copy half of the record buffer to the playback buffer */
 			if (audio_line_in_buffer_state == BUFFER_OFFSET_HALF)
 			{
+				/* Copy Audio to Filter Buffer */
+				memcpy(&audio_filter_buffer, &audio_in_buffer, RECORD_BUFFER_SIZE/2);
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					//Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[0], RECORD_BUFFER_SIZE/2);
+					FX1((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
 				} else if (fx_state == FX_STATE_2) {
-					// fx #2
-				} else if (fx_state == FX_STATE_2) {
-					// fx #3
-				} else if (fx_state == FX_STATE_2) {
-					// fx #4
+					FX2((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
+				} else if (fx_state == FX_STATE_3) {
+					FX3((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
+				} else if (fx_state == FX_STATE_4) {
+					FX4((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
 				}
 				/* Send to Output */
 				if (usb_state == USB_STATE_OFF) {
-					memcpy(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE);
+					if (fx_state == FX_STATE_NONE)
+						memcpy(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE);
+					else
+						memcpy(&audio_out_buffer[0], &audio_filter_buffer[0], RECORD_BUFFER_SIZE);
 				} else {
 					// Do USB Stuff
 				}
 			}
 			else
 			{
+				/* Copy Audio to Filter Buffer */
+				memcpy(&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
+					   &audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					//Calc_FX1_Buffer((uint16_t *)&audio_out_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+					FX1((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
+					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
 				} else if (fx_state == FX_STATE_2) {
-					// fx #2
-				} else if (fx_state == FX_STATE_2) {
-					// fx #3
-				} else if (fx_state == FX_STATE_2) {
-					// fx #4
+					FX2((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
+					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+				} else if (fx_state == FX_STATE_3) {
+					FX3((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
+					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+				} else if (fx_state == FX_STATE_4) {
+					FX4((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
+						(uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
 				}
 				/* Send to Output */
 				if (usb_state == USB_STATE_OFF) {
-					memcpy(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
-						   &audio_in_buffer[RECORD_BUFFER_SIZE / 2],
-						   RECORD_BUFFER_SIZE);
+					if (fx_state == FX_STATE_NONE)
+						memcpy(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
+							   &audio_in_buffer[RECORD_BUFFER_SIZE / 2],
+							   RECORD_BUFFER_SIZE);
+					else
+						memcpy(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
+							   &audio_filter_buffer[RECORD_BUFFER_SIZE / 2],
+							   RECORD_BUFFER_SIZE);
 				} else {
 					// Do USB Stuff
 				}
@@ -143,7 +159,3 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		TIM_TICK = 1;
 	}
 }
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
