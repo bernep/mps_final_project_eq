@@ -43,6 +43,7 @@
 "./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.o"
 "./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.o"
 "./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.o"
+"./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_usb.o"
 "./Drivers/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.o"
 "./Drivers/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio_if_template.o"
 "./Drivers/STM32_USB_Device_Library/Core/Src/usbd_core.o"

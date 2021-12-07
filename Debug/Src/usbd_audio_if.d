@@ -44,6 +44,7 @@ Src/usbd_audio_if.o: ../Src/usbd_audio_if.c ../Inc/usbd_audio_if.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h \
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_hcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dsi.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_jpeg.h \
@@ -53,7 +54,12 @@ Src/usbd_audio_if.o: ../Src/usbd_audio_if.c ../Inc/usbd_audio_if.h \
  ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/wm8994.h \
  ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h \
- ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h ../Inc/usb.h \
+ ../Inc/init.h ../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h \
+ ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h ../Inc/uart.h \
+ ../Inc/usbd_conf.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
+ ../Inc/usbd_audio_if.h
 
 ../Inc/usbd_audio_if.h:
 
@@ -151,6 +157,8 @@ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspac
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h:
 
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_hcd.h:
+
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dfsdm.h:
 
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_dsi.h:
@@ -170,3 +178,19 @@ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspac
 ../Drivers/BSP/STM32F769I-Discovery/../Components/wm8994/../Common/audio.h:
 
 ../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h:
+
+../Inc/usb.h:
+
+../Inc/init.h:
+
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h:
+
+../Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h:
+
+../Inc/uart.h:
+
+../Inc/usbd_conf.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
+
+../Inc/usbd_audio_if.h:

@@ -35,7 +35,8 @@ C_SRCS += \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.c \
 ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.c \
-../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.c 
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.c \
+../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_usb.c 
 
 OBJS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.o \
@@ -68,7 +69,8 @@ OBJS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.o \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.o \
-./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.o 
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.o \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_usb.o 
 
 C_DEPS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.d \
@@ -101,7 +103,8 @@ C_DEPS += \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_uart.d \
 ./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.d \
-./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.d 
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_sdmmc.d \
+./Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_usb.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

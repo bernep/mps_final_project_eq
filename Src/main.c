@@ -42,10 +42,10 @@ int main(void) {
 	Timer_Init(); // Initialize Program Timer
 	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 
-	//Line_Audio_Init(); // Initialize Audio Functionality
-	USB_Audio_Init();
-	usb_state = USB_STATE_ON;
-	ui_data.usb_selection_state = USB_STATE_ON;
+	Line_Audio_Init(); // Initialize Audio Functionality
+	//USB_Audio_Init();
+	//usb_state = USB_STATE_ON;
+	//ui_data.usb_selection_state = USB_STATE_ON;
 
 	/* Main Loop */
 	while (1) {

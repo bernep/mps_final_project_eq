@@ -7,7 +7,6 @@
 
 #include "audio.h"
 #include "filter.h"
-#include "usbd_audio.h"
 #include "usb.h"
 #include "ui.h"
 

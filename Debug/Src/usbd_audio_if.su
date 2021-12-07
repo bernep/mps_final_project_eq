@@ -1,7 +1,7 @@
-usbd_audio_if.c:153:15:Audio_PeriodicTC	0	static
-usbd_audio_if.c:163:15:Audio_GetState	0	static
-usbd_audio_if.c:142:15:Audio_MuteCtl	8	static
-usbd_audio_if.c:131:15:Audio_VolumeCtl	8	static
-usbd_audio_if.c:111:15:Audio_PlaybackCmd	8	static
-usbd_audio_if.c:98:15:Audio_DeInit	8	static
-usbd_audio_if.c:83:15:Audio_Init	8	static
+usbd_audio_if.c:154:15:Audio_PeriodicTC	0	static
+usbd_audio_if.c:164:15:Audio_GetState	0	static
+usbd_audio_if.c:143:15:Audio_MuteCtl	8	static
+usbd_audio_if.c:132:15:Audio_VolumeCtl	8	static
+usbd_audio_if.c:112:15:Audio_PlaybackCmd	8	static
+usbd_audio_if.c:99:15:Audio_DeInit	8	static
+usbd_audio_if.c:84:15:Audio_Init	8	static
