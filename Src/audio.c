@@ -13,8 +13,7 @@
 
 
 void USB_Audio_Init(void){
-
-
+	USBD_Setup();
 }
 
 
@@ -68,6 +67,7 @@ void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_in_buffer_state = BUFFER_OFFSET_FULL;
 	} else {
+		 audio_usb_in_buffer_state = BUFFER_OFFSET_FULL;
 
 	}
 }
@@ -80,7 +80,12 @@ void BSP_AUDIO_IN_TransferComplete_CallBack(void)
   */
 void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
 {
-	 audio_line_in_buffer_state = BUFFER_OFFSET_HALF;
+	if(ui_data.usb_selection_state == USB_STATE_OFF){
+		 audio_line_in_buffer_state = BUFFER_OFFSET_HALF;
+	} else {
+		 audio_usb_in_buffer_state = BUFFER_OFFSET_HALF;
+
+	}
 }
 
 
@@ -94,7 +99,7 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_out_buffer_state = BUFFER_OFFSET_FULL;
 	} else {
-		USBD_AUDIO_Sync(&husbd, AUDIO_OFFSET_FULL);
+		USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_FULL);
 
 	}
 }
@@ -109,7 +114,7 @@ void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_out_buffer_state = BUFFER_OFFSET_FULL;
 	} else {
-		USBD_AUDIO_Sync(&husbd, AUDIO_OFFSET_HALF);
+		USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_HALF);
 	}
 }
 

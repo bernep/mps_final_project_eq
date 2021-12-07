@@ -42,8 +42,10 @@ int main(void) {
 	Timer_Init(); // Initialize Program Timer
 	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 
-	Line_Audio_Init(); // Initialize Audio Functionality
-	//USB_Audio_Init();
+	//Line_Audio_Init(); // Initialize Audio Functionality
+	USB_Audio_Init();
+	usb_state = USB_STATE_ON;
+	ui_data.usb_selection_state = USB_STATE_ON;
 
 	/* Main Loop */
 	while (1) {
@@ -104,6 +106,12 @@ int main(void) {
 			/* Wait for next data */
 			audio_line_in_buffer_state = BUFFER_OFFSET_NONE;
 		}
+
+		if(audio_usb_in_buffer_state != BUFFER_OFFSET_NONE){
+			printf("we got some data\r\n");
+			fflush(stdout);
+		}
+
 		/* Reset audio flag */
 		if (audio_line_out_buffer_state)
 		{

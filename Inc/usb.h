@@ -15,9 +15,11 @@
 
 #include "usbd_conf.h"
 #include "usbd_core.h"
+#include "usbd_audio_if.h"
 
-USBD_ClassTypeDef husbd;
+USBD_HandleTypeDef USBD_Device;
 
+extern USBD_AUDIO_ItfTypeDef USBD_AUDIO_fops;
 
 void USBD_Setup();
 

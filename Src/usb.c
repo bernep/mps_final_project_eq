@@ -15,20 +15,25 @@
 void USBD_Setup(){
 
 	// Application Initializations
-	printf("\033[2J\033[HInitialize USBH\r\n");
+	printf("\033[2J\033[HInitialize USBD\r\n");
 	fflush(stdout);
-	USBD_Init(&husbd, &AUDIO_Desc, 0);
+	USBD_Init(&USBD_Device, &AUDIO_Desc, 0);
 
 	// USBH Driver Initialization
 	printf("Registering Class\r\n");
 	fflush(stdout);
-	USBD_RegisterClass(&husbd, USBD_AUDIO_CLASS);
+	USBD_RegisterClass(&USBD_Device, USBD_AUDIO_CLASS);
+
+
+	/* Add Interface callbacks for AUDIO Class */
+	printf("Adding USB Interface\r\n");
+	USBD_AUDIO_RegisterInterface(&USBD_Device, &USBD_AUDIO_fops);
 
 	// USB Driver Class Registrations: Add device types to handle.
 	// Start USBH Driver
 	printf("Starting USB Host\r\n");
 	fflush(stdout);
-	USBD_Start(&husbd);
+	USBD_Start(&USBD_Device);
 
 }
 
