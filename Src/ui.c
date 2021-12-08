@@ -39,8 +39,8 @@ uint32_t xSize_LCD, ySize_LCD, iconSize, iconPosX_FX, iconPosY_FX,
 char* iconName_FX = "note.jpg";
 char* iconName_SV = "sine.jpg";
 char* iconName_FX1 = "lpf.jpg";
-char* iconName_FX2 = "hpf.jpg";
-char* iconName_FX3 = "comp.jpg";
+char* iconName_FX2 = "comp.jpg";
+char* iconName_FX3 = "hpf.jpg";
 char* iconName_FX4 = "wilt.jpg";
 int menu_state = 0;
 int user_button_pushed = 0;
@@ -121,7 +121,7 @@ void UI_Init() {
 // -- Helper Functions -----
 //
 /* Bundle UI Interaction Functions */
-Struct UI_Handler(uint16_t* pData, uint16_t fx_state_current,
+Struct UI_Handler(int16_t* pData, uint16_t fx_state_current,
 				  uint16_t usb_state_current, uint16_t sv_state_current) {
 	Button_Handler();
 	SV_Handler(pData, sv_state_current); // pData must have 4096 entries
@@ -197,9 +197,9 @@ void UI_Config_SV(uint16_t sv_state) {
 	// Axes Labels
 	BSP_LCD_DisplayStringAt(430, ySize_LCD-30, (uint8_t *)"0", CENTER_MODE);
 	if (sv_state == SV_STATE_SCOPE) {
-		BSP_LCD_DisplayStringAt(350, ySize_LCD-30, (uint8_t *)"4096", CENTER_MODE);
+		BSP_LCD_DisplayStringAt(350, ySize_LCD-30, (uint8_t *)"TIME", CENTER_MODE);
 	} else if (sv_state == SV_STATE_SPECTRUM) {
-		BSP_LCD_DisplayStringAt(350, ySize_LCD-30, (uint8_t *)"20kHz", CENTER_MODE);
+		BSP_LCD_DisplayStringAt(350, ySize_LCD-30, (uint8_t *)"FREQ", CENTER_MODE);
 	}
 }
 
@@ -212,24 +212,29 @@ void Button_Handler() {
 }
 
 /* Handle Signal Viewer Display */
-void SV_Handler(uint16_t* pData, uint16_t sv_state) {
+void SV_Handler(int16_t* pData, uint16_t sv_state) {
 	if (menu_state == SV_MENU_STATE) {
 		// Clear Graph
 		UI_Config_SV(sv_state);
 		// Set Variables
 		uint16_t avg = 0;
-		uint16_t prev_y = 0;
+		uint16_t prev_y = axisScaleY/2;
 		uint16_t inverse_scale_factor = 88;
 		// Display plot lines for data array
 		BSP_LCD_SetTextColor(LCD_COLOR_LIGHTRED);
 		for (int i = 0; i < 2048; i++) {
 			// Average every 6 samples and draw
-			avg += *pData/inverse_scale_factor; // Scale to fit on plot
+			avg += (*pData+32767)/inverse_scale_factor; // Scale to fit on plot
 			pData++;
+			if (sv_state == SV_STATE_SPECTRUM) {
+				pData++; // Increment again to prevent mirrored output on Spectrum Analyzer
+			}
 			if (i % 6 == 0) {
 				avg /= 6;
-				if (i > 0) BSP_LCD_DrawLine(axisPosX_StartLeft+i/3, axisPosY_StartTop+prev_y,
-								 axisPosX_StartLeft+i/3+1, axisPosY_StartTop+(axisScaleY-avg));
+				if (i > 6) {
+					BSP_LCD_DrawLine(axisPosX_StartLeft+i/3, 244+prev_y,
+							 	 	 axisPosX_StartLeft+i/3+1, 244+(axisScaleY-avg));
+				}
 				prev_y = axisScaleY-avg;
 				avg = 0;
 			}

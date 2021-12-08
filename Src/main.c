@@ -15,16 +15,24 @@
 #include "stm32f769i_discovery_audio.h"
 #include <string.h>
 #include "ui.h"
+#include "fft.h"
+#include "complex.h"
 
 //
 //
 // -- Global --
 //
+/* Timer */
 TIM_HandleTypeDef htim;
 int TIM_TICK = 0;
+/* UI */
 int fx_state = FX_STATE_NONE;
 int sv_state = SV_STATE_SCOPE;
 int usb_state = USB_STATE_OFF;
+/* Audio */
+double audio_ft_buffer_real[RECORD_BUFFER_SIZE];
+double audio_ft_buffer_imag[RECORD_BUFFER_SIZE];
+int16_t audio_ft_out_buffer[RECORD_BUFFER_SIZE];
 
 //
 //
@@ -50,7 +58,22 @@ int main(void) {
 	while (1) {
 		/* Handle UI Updates */
 		if (TIM_TICK == 1) {
-			ui_data = UI_Handler((uint16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
+			/* Time Domain Visualization */
+			if (sv_state == SV_STATE_SCOPE) {
+				ui_data = UI_Handler((int16_t*)&audio_out_buffer, fx_state, usb_state, sv_state);
+			}
+			/* Frequency Domain Visualization */
+			else {
+				for (int i = 0; i < RECORD_BUFFER_SIZE; i++) {
+					audio_ft_buffer_real[i] = (double)audio_in_buffer[i];
+					audio_ft_buffer_imag[i] = 0;
+				}
+				FFT(-1, 12, (double*)&audio_ft_buffer_real, (double*)&audio_ft_buffer_imag);
+				for (int i = 0; i < RECORD_BUFFER_SIZE; i++) {
+					audio_ft_out_buffer[i] = (int16_t)audio_ft_buffer_real[i]/2;
+				}
+				ui_data = UI_Handler((int16_t*)&audio_ft_out_buffer, fx_state, usb_state, sv_state);
+			}
 			fx_state = ui_data.fx_selection_state;
 			usb_state = ui_data.usb_selection_state;
 			sv_state = ui_data.sv_selection_state;
@@ -66,35 +89,35 @@ int main(void) {
 			{
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					FX1((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
+					FX1((int16_t*)&audio_out_buffer, (int16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_2) {
-					FX2((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
+					FX2((int16_t*)&audio_out_buffer, (int16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_3) {
-					FX3((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
+					FX3((int16_t*)&audio_out_buffer, (int16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_4) {
-					FX4((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
+					FX4((int16_t*)&audio_out_buffer, (int16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else { // No FX
-					memcpy((uint16_t*)&audio_out_buffer[0], (uint16_t*)&audio_in_buffer[0], RECORD_BUFFER_SIZE);
+					memcpy((int16_t*)&audio_out_buffer[0], (int16_t*)&audio_in_buffer[0], RECORD_BUFFER_SIZE);
 				}
 			}
 			else
 			{
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					FX1((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
-					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
+					FX1((int16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+					    (int16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_2) {
-					FX2((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
-					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
+					FX2((int16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+					    (int16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_3) {
-					FX3((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
-					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
+					FX3((int16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+					    (int16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_4) {
-					FX4((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
-						(uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
+					FX4((int16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+						(int16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else { // No FX
-					memcpy((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
-						   (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
+					memcpy((int16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+						   (int16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				}
 			}
 			/* Wait for next data */
@@ -122,7 +145,7 @@ void Timer_Init() {
 	__HAL_RCC_TIM7_CLK_ENABLE(); // Clock Enable
 	htim.Instance = TIM7;
 	htim.Init.Prescaler = 1079U; //108MHz/1080 = 100000Hz
-	htim.Init.Period = 4999U; //100000Hz/5000 = 20Hz
+	htim.Init.Period = 3333U; //100000Hz/3334 = 30Hz
 	HAL_NVIC_EnableIRQ(TIM7_IRQn);
 	HAL_TIM_Base_Init(&htim);
 	HAL_TIM_Base_Start_IT(&htim);
