@@ -39,8 +39,8 @@ uint32_t xSize_LCD, ySize_LCD, iconSize, iconPosX_FX, iconPosY_FX,
 char* iconName_FX = "note.jpg";
 char* iconName_SV = "sine.jpg";
 char* iconName_FX1 = "lpf.jpg";
-char* iconName_FX2 = "comp.jpg";
-char* iconName_FX3 = "hpf.jpg";
+char* iconName_FX2 = "hpf.jpg";
+char* iconName_FX3 = "lpf.jpg";
 char* iconName_FX4 = "wilt.jpg";
 int menu_state = 0;
 int user_button_pushed = 0;
@@ -171,9 +171,9 @@ void UI_Config_FX() {
 	BSP_LCD_FillRect(iconPosX_FX4, iconPosY_FX4, iconSize, iconSize);
 	// Text
 	BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-	BSP_LCD_DisplayStringAt(650, iconPosY_FX1+iconSize+20, (uint8_t *)"Volume Up", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(150, iconPosY_FX2+iconSize+20, (uint8_t *)"Distortion", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(650, iconPosY_FX3+iconSize+20, (uint8_t *)"Volume Down", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(650, iconPosY_FX1+iconSize+20, (uint8_t *)"Lowpass", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(150, iconPosY_FX2+iconSize+20, (uint8_t *)"Highpass", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(650, iconPosY_FX3+iconSize+20, (uint8_t *)"Bandpass", CENTER_MODE);
 	BSP_LCD_DisplayStringAt(150, iconPosY_FX4+iconSize+20, (uint8_t *)"Mute", CENTER_MODE);
 	// Display JPEGs (if files are present)
 	if (SD_CARD_ENABLED == 1) {
