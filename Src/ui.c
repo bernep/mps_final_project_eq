@@ -171,10 +171,10 @@ void UI_Config_FX() {
 	BSP_LCD_FillRect(iconPosX_FX4, iconPosY_FX4, iconSize, iconSize);
 	// Text
 	BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-	BSP_LCD_DisplayStringAt(650, iconPosY_FX1+iconSize+20, (uint8_t *)"Low Pass Filter", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(150, iconPosY_FX2+iconSize+20, (uint8_t *)"High Pass Filter", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(650, iconPosY_FX3+iconSize+20, (uint8_t *)"Compressor", CENTER_MODE);
-	BSP_LCD_DisplayStringAt(150, iconPosY_FX4+iconSize+20, (uint8_t *)"Wacky", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(650, iconPosY_FX1+iconSize+20, (uint8_t *)"Volume Up", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(150, iconPosY_FX2+iconSize+20, (uint8_t *)"Distortion", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(650, iconPosY_FX3+iconSize+20, (uint8_t *)"Volume Down", CENTER_MODE);
+	BSP_LCD_DisplayStringAt(150, iconPosY_FX4+iconSize+20, (uint8_t *)"Mute", CENTER_MODE);
 	// Display JPEGs (if files are present)
 	if (SD_CARD_ENABLED == 1) {
 		displayJPEG(iconName_FX1, iconPosX_FX1, iconPosY_FX1);
@@ -217,19 +217,19 @@ void SV_Handler(uint16_t* pData, uint16_t sv_state) {
 		// Clear Graph
 		UI_Config_SV(sv_state);
 		// Set Variables
-		int avg = 0;
-		int prev_y = 0;
-		int inverse_scale_factor = 88;
+		uint16_t avg = 0;
+		uint16_t prev_y = 0;
+		uint16_t inverse_scale_factor = 88;
 		// Display plot lines for data array
 		BSP_LCD_SetTextColor(LCD_COLOR_LIGHTRED);
-		for (int i = 0; i < 4096; i++) {
+		for (int i = 0; i < 2048; i++) {
 			// Average every 6 samples and draw
 			avg += *pData/inverse_scale_factor; // Scale to fit on plot
 			pData++;
 			if (i % 6 == 0) {
 				avg /= 6;
-				if (i > 0) BSP_LCD_DrawLine(axisPosX_StartLeft+i/6, axisPosY_StartTop+prev_y,
-								 axisPosX_StartLeft+i/6+1, axisPosY_StartTop+(axisScaleY-avg));
+				if (i > 0) BSP_LCD_DrawLine(axisPosX_StartLeft+i/3, axisPosY_StartTop+prev_y,
+								 axisPosX_StartLeft+i/3+1, axisPosY_StartTop+(axisScaleY-avg));
 				prev_y = axisScaleY-avg;
 				avg = 0;
 			}

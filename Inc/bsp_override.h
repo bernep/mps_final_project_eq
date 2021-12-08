@@ -29,9 +29,6 @@ SAI_HandleTypeDef haudio_out_sai, haudio_in_sai;
 /* Buffer containing the PCM samples coming from the microphone */
 int16_t audio_in_buffer[RECORD_BUFFER_SIZE];
 
-/* Buffer used to filter audio. */
-int16_t audio_filter_buffer[RECORD_BUFFER_SIZE];
-
 /* Buffer used to stream the recorded PCM samples towards the audio codec. */
 int16_t audio_out_buffer[RECORD_BUFFER_SIZE];
 

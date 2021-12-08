@@ -64,59 +64,37 @@ int main(void) {
 			/* Copy half of the record buffer to the playback buffer */
 			if (audio_line_in_buffer_state == BUFFER_OFFSET_HALF)
 			{
-				/* Copy Audio to Filter Buffer */
-				memcpy(&audio_filter_buffer, &audio_in_buffer, RECORD_BUFFER_SIZE/2);
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					FX1((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
+					FX1((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_2) {
-					FX2((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
+					FX2((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_3) {
-					FX3((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
+					FX3((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_4) {
-					FX4((uint16_t*)&audio_filter_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE/2);
-				}
-				/* Send to Output */
-				if (usb_state == USB_STATE_OFF) {
-					if (fx_state == FX_STATE_NONE)
-						memcpy(&audio_out_buffer[0], &audio_in_buffer[0], RECORD_BUFFER_SIZE);
-					else
-						memcpy(&audio_out_buffer[0], &audio_filter_buffer[0], RECORD_BUFFER_SIZE);
-				} else {
-					// Do USB Stuff
+					FX4((uint16_t*)&audio_out_buffer, (uint16_t*)&audio_in_buffer, RECORD_BUFFER_SIZE);
+				} else { // No FX
+					memcpy((uint16_t*)&audio_out_buffer[0], (uint16_t*)&audio_in_buffer[0], RECORD_BUFFER_SIZE);
 				}
 			}
 			else
 			{
-				/* Copy Audio to Filter Buffer */
-				memcpy(&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
-					   &audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
 				/* Select Sound FX */
 				if (fx_state == FX_STATE_1) {
-					FX1((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
-					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+					FX1((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_2) {
-					FX2((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
-					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+					FX2((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_3) {
-					FX3((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
-					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
+					FX3((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+					    (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				} else if (fx_state == FX_STATE_4) {
-					FX4((uint16_t*)&audio_filter_buffer[RECORD_BUFFER_SIZE/2],
-						(uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE/2);
-				}
-				/* Send to Output */
-				if (usb_state == USB_STATE_OFF) {
-					if (fx_state == FX_STATE_NONE)
-						memcpy(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
-							   &audio_in_buffer[RECORD_BUFFER_SIZE / 2],
-							   RECORD_BUFFER_SIZE);
-					else
-						memcpy(&audio_out_buffer[RECORD_BUFFER_SIZE / 2],
-							   &audio_filter_buffer[RECORD_BUFFER_SIZE / 2],
-							   RECORD_BUFFER_SIZE);
-				} else {
-					// Do USB Stuff
+					FX4((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+						(uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
+				} else { // No FX
+					memcpy((uint16_t*)&audio_out_buffer[RECORD_BUFFER_SIZE/2],
+						   (uint16_t*)&audio_in_buffer[RECORD_BUFFER_SIZE/2], RECORD_BUFFER_SIZE);
 				}
 			}
 			/* Wait for next data */
