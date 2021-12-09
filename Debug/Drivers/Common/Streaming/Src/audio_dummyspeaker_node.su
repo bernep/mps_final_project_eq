@@ -1,0 +1,11 @@
+audio_dummyspeaker_node.c:86:17:AUDIO_SpeakerUpdateBuffer	16	static
+audio_dummyspeaker_node.c:149:16:AUDIO_SpeakerDeInit	0	static
+audio_dummyspeaker_node.c:188:16:AUDIO_SpeakerStop	0	static
+audio_dummyspeaker_node.c:220:14:AUDIO_SpeakerInitInjectionsParams	0	static
+audio_dummyspeaker_node.c:204:16:AUDIO_SpeakerChangeFrequency	8	static
+audio_dummyspeaker_node.c:238:16:AUDIO_SpeakerMute	0	static
+audio_dummyspeaker_node.c:256:16:AUDIO_SpeakerSetVolume	0	static
+audio_dummyspeaker_node.c:170:16:AUDIO_SpeakerStart	8	static
+audio_dummyspeaker_node.c:271:16:AUDIO_SpeakerStartReadCount	0	static
+audio_dummyspeaker_node.c:282:18:AUDIO_SpeakerGetLastReadCount	8	static
+audio_dummyspeaker_node.c:53:10:AUDIO_SPEAKER_USER_Init	16	static

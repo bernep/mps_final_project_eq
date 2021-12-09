@@ -74,7 +74,10 @@ USBConf/Src/usbd_conf.o: ../USBConf/Src/usbd_conf.c \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Inc/bsp_override.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.h \
- c:\users\mchonaker\documents\projects\rpi-classes\fall\ 2021\ecse\ 4790\workspace\mps_final_project_eq\drivers\bsp\components\wm8994\wm8994.h
+ c:\users\mchonaker\documents\projects\rpi-classes\fall\ 2021\ecse\ 4790\workspace\mps_final_project_eq\drivers\bsp\components\wm8994\wm8994.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_mic_node.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_speaker_node.h \
+ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/USBConf/Inc/audio_user_devices.h
 
 C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 
@@ -227,3 +230,9 @@ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspac
 C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio.h:
 
 c:\users\mchonaker\documents\projects\rpi-classes\fall\ 2021\ecse\ 4790\workspace\mps_final_project_eq\drivers\bsp\components\wm8994\wm8994.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_mic_node.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_speaker_node.h:
+
+C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/USBConf/Inc/audio_user_devices.h:

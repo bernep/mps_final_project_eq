@@ -4,9 +4,9 @@ audio_usb_recording_session.c:362:16:USB_AudioRecordingSetAudioStreamingInterfac
 audio_usb_recording_session.c:394:16:USB_AudioRecordingGetState	0	static
 audio_usb_recording_session.c:469:13:USB_AudioRecordingSynchroInit	4	static
 audio_usb_recording_session.c:498:14:USB_AudioRecordingSynchroUpdate	4	static
-audio_usb_recording_session.c:406:15:USB_AudioRecordingSofReceived	16	static
+audio_usb_recording_session.c:406:15:USB_AudioRecordingSofReceived	8	static
 audio_usb_recording_session.c:290:16:USB_AudioRecordingSessionCallback	16	static
 audio_usb_recording_session.c:255:16:USB_AudioRecordingSessionDeInit	16	static
-audio_usb_recording_session.c:113:10:AUDIO_RecordingSessionInit	48	static
+audio_usb_recording_session.c:113:10:AUDIO_RecordingSessionInit	56	static
 audio_usb_recording_session.c:615:9:USB_AudioRecordingSynchronizationGetSamplesCountToAddInNextPckt	0	static
 audio_usb_recording_session.c:629:10:USB_AudioRecordingSynchronizationNotificationSamplesRead	0	static

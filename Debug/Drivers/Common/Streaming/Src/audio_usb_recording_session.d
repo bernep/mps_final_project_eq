@@ -61,11 +61,6 @@ Drivers/Common/Streaming/Src/audio_usb_recording_session.o: \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/USBConf/Inc/usb_audio.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_mic_node.h \
- C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/USBConf/Inc/audio_user_devices.h \
- C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio_ex.h \
- C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/Components/wm8994_ex/wm8994_ex.h \
- C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/Components/Common/audio.h \
- C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_node.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_sessions_usb.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_usb_nodes.h
@@ -191,16 +186,6 @@ C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspac
 C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/USBConf/Inc/usb_audio.h:
 
 C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_mic_node.h:
-
-C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/USBConf/Inc/audio_user_devices.h:
-
-C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery_audio_ex.h:
-
-C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/Components/wm8994_ex/wm8994_ex.h:
-
-C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/Components/Common/audio.h:
-
-C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery/stm32f769i_discovery.h:
 
 C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc/audio_node.h:
 

@@ -71,16 +71,17 @@ void Error_Handler(void)
   * @param None
   * @retval None
   */
-/*
+
 void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 {
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_in_buffer_state = BUFFER_OFFSET_FULL;
 	} else {
-		 audio_usb_in_buffer_state = BUFFER_OFFSET_FULL;
+		//USB STUFF
+		//audio_usb_in_buffer_state = BUFFER_OFFSET_FULL;
 
 	}
-}*/
+}
 
 
 /**
@@ -88,16 +89,18 @@ void BSP_AUDIO_IN_TransferComplete_CallBack(void)
   * @param  None
   * @retval None
   */
-/*
+
 void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
 {
+
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_in_buffer_state = BUFFER_OFFSET_HALF;
 	} else {
-		 audio_usb_in_buffer_state = BUFFER_OFFSET_HALF;
+		//USB STUFF
+		//audio_usb_in_buffer_state = BUFFER_OFFSET_HALF;
 
 	}
-}*/
+}
 
 
 /**
@@ -105,17 +108,17 @@ void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
   * @param  None
   * @retval None
   */
-/*
+
 void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 {
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_out_buffer_state = BUFFER_OFFSET_FULL;
 	} else {
-		USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_FULL);
+		//USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_FULL);
 
 	}
 }
-*/
+
 
 
 /**
@@ -123,16 +126,16 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
   * @param  None
   * @retval None
   */
-/*
+
 void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 {
 	if(ui_data.usb_selection_state == USB_STATE_OFF){
 		 audio_line_out_buffer_state = BUFFER_OFFSET_FULL;
 	} else {
-		USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_HALF);
+		//USBD_AUDIO_Sync(&USBD_Device, AUDIO_OFFSET_HALF);
 	}
 }
-*/
+
 
  /**
    * @brief  Audio IN Error callback function.

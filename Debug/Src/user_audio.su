@@ -1,3 +1,7 @@
 user_audio.c:14:6:USB_Audio_Init	8	static
 user_audio.c:27:6:Line_Audio_Init	8	static
 user_audio.c:61:6:Error_Handler	0	static
+user_audio.c:75:6:BSP_AUDIO_IN_TransferComplete_CallBack	0	static
+user_audio.c:93:6:BSP_AUDIO_IN_HalfTransfer_CallBack	0	static
+user_audio.c:112:6:BSP_AUDIO_OUT_TransferComplete_CallBack	0	static
+user_audio.c:130:6:BSP_AUDIO_OUT_HalfTransfer_CallBack	0	static

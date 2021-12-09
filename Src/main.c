@@ -34,6 +34,8 @@ double audio_ft_buffer_real[RECORD_BUFFER_SIZE];
 double audio_ft_buffer_imag[RECORD_BUFFER_SIZE];
 int16_t audio_ft_out_buffer[RECORD_BUFFER_SIZE];
 
+
+
 //
 //
 // -- Function Prototypes --
@@ -51,11 +53,10 @@ int main(void) {
 	UI_Init(); // Initialize SD Card, LCD, JPEG Peripheral, and Pushbutton
 	Line_Audio_Init(); // Initialize Audio Functionality
 	//USB_Audio_Init();
-	//usb_state = USB_STATE_ON;
-	//ui_data.usb_selection_state = USB_STATE_ON;
 
 	/* Main Loop */
 	while (1) {
+
 		/* Handle UI Updates */
 		if (TIM_TICK == 1) {
 			/* Time Domain Visualization */
@@ -78,6 +79,7 @@ int main(void) {
 			usb_state = ui_data.usb_selection_state;
 			sv_state = ui_data.sv_selection_state;
 			TIM_TICK = 0;
+
 		}
 
 

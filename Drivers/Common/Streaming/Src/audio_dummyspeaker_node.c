@@ -39,7 +39,7 @@ static uint16_t AUDIO_SpeakerGetLastReadCount( uint32_t node_handle);
 /* Private macros ------------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
 /* Private variables -----------------------------------------------------------*/
-static AUDIO_SpeakerNode_t *current_speaker = 0;
+AUDIO_SpeakerNode_t *current_speaker = 0;
 /* Exported functions ---------------------------------------------------------*/
 
 /**
@@ -73,6 +73,7 @@ static AUDIO_SpeakerNode_t *current_speaker = 0;
   speaker->SpeakerStartReadCount = AUDIO_SpeakerStartReadCount;
   speaker->SpeakerGetReadCount = AUDIO_SpeakerGetLastReadCount;
   current_speaker = speaker;
+
   return 0;
 }
 

@@ -93,7 +93,7 @@ static void USB_AudioRecordingSynchroUpdate(int audio_buffer_filled_size );
 static AUDIO_USBInputOutputNode_t RecordingUSBOutputNode;
 static AUDIO_Description_t RecordingAudioDescription;
 static AUDIO_USB_CF_NodeTypeDef RecordingFeatureUnitNode;
-static AUDIO_MicNode_t RecordingMicrophoneNode;
+AUDIO_MicNode_t RecordingMicrophoneNode;
 #if USE_AUDIO_RECORDING_USB_IMPLICIT_SYNCHRO 
 static  USB_AudioRecordingSynchronizationParams_t RecordingSynchronizationParams; /* synchro parameters*/
 #endif /* USE_AUDIO_RECORDING_USB_IMPLICIT_SYNCHRO*/

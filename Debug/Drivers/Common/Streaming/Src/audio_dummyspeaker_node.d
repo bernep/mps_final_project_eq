@@ -1,4 +1,5 @@
-USBConf/Src/audio_speaker_node.o: ../USBConf/Src/audio_speaker_node.c \
+Drivers/Common/Streaming/Src/audio_dummyspeaker_node.o: \
+ ../Drivers/Common/Streaming/Src/audio_dummyspeaker_node.c \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Class/AUDIO_10/Inc/usbd_audio.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL\ 2021/ECSE\ 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
