@@ -1,1 +1,3 @@
-usb.c:15:6:USBD_Setup	16	static
+usb.c:18:6:USBD_Setup	8	static
+usb.c:35:6:USBD_Start_Device	8	static
+usb.c:40:6:USBD_Stop_Device	8	static

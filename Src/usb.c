@@ -9,35 +9,38 @@
 
 #ifdef USB_DEVICE_ENABLE
 
+#include "usb_audio.h"
 #include "usbd_desc.h"
 #include "usbd_audio.h"
+#include "usbd_audio_if.h"
+
 
 void USBD_Setup(){
 
 	// Application Initializations
-	printf("\033[2J\033[HInitialize USBD\r\n");
-	fflush(stdout);
-	USBD_Init(&USBD_Device, &AUDIO_Desc, 0);
+	  /* Init Device Library */
+	  USBD_Init(&USBD_Device, &AUDIO_Desc, 0);
 
-	// USBH Driver Initialization
-	printf("Registering Class\r\n");
-	fflush(stdout);
-	USBD_RegisterClass(&USBD_Device, USBD_AUDIO_CLASS);
+	  /* Add Supported Class */
+	  USBD_RegisterClass(&USBD_Device, USBD_AUDIO_CLASS);
+
+	  /* Add Interface callbacks for AUDIO Class */
+	  USBD_AUDIO_RegisterInterface(&USBD_Device, &audio_class_interface);
 
 
-	/* Add Interface callbacks for AUDIO Class */
-	printf("Adding USB Interface\r\n");
-	USBD_AUDIO_RegisterInterface(&USBD_Device, &USBD_AUDIO_fops);
-
-	// USB Driver Class Registrations: Add device types to handle.
-	// Start USBH Driver
-	printf("Starting USB Device\r\n");
-	fflush(stdout);
-	USBD_Start(&USBD_Device);
 
 }
 
 
+void USBD_Start_Device(){
+	  /* Start Device Process */
+	  USBD_Start(&USBD_Device);
+}
+
+void USBD_Stop_Device(){
+	  /* Start Device Process */
+	  USBD_Stop(&USBD_Device);
+}
 
 #endif
 

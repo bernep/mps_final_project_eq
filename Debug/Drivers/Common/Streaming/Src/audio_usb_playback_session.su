@@ -1,0 +1,9 @@
+audio_usb_playback_session.c:162:16:USB_AudioPlaybackSessionStart	32	static
+audio_usb_playback_session.c:186:16:USB_AudioPlaybackSessionStop	16	static
+audio_usb_playback_session.c:344:16:USB_AudioPlaybackSetAudioStreamingInterfaceAlternateSetting	16	static
+audio_usb_playback_session.c:374:16:USB_AudioPlaybackGetState	0	static
+audio_usb_playback_session.c:388:19:USB_AudioPlaybackGetFeedback	0	static
+audio_usb_playback_session.c:422:14:AUDIO_USB_Session_Sof_Received	8	static
+audio_usb_playback_session.c:281:16:USB_AudioPlaybackSessionCallback	16	static
+audio_usb_playback_session.c:206:16:USB_AudioPlaybackSessionDeInit	16	static
+audio_usb_playback_session.c:80:10:AUDIO_PlaybackSessionInit	64	static

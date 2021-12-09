@@ -1,0 +1,3 @@
+user_audio.c:14:6:USB_Audio_Init	8	static
+user_audio.c:27:6:Line_Audio_Init	8	static
+user_audio.c:61:6:Error_Handler	0	static

@@ -23,15 +23,17 @@ SUBDIRS := \
 Drivers/BSP/Components/adv7533 \
 Drivers/BSP/Components/ft6x06 \
 Drivers/BSP/Components/otm8009a \
-Drivers/BSP/Components/wm8994 \
+Drivers/BSP/Components/wm8994_ex \
 Drivers/BSP/STM32F769I-Discovery \
+Drivers/Common/Streaming/Src \
 Drivers/FatFs/src \
 Drivers/FatFs/src/drivers \
 Drivers/STM32F7xx_HAL_Driver/Src \
-Drivers/STM32_USB_Device_Library/Class/AUDIO/Src \
+Drivers/STM32_USB_Device_Library/Class/AUDIO_10/Src \
 Drivers/STM32_USB_Device_Library/Core/Src \
 Drivers/Utilities/JPEG \
 Drivers/Utilities/Log \
 Src \
+USBConf/Src \
 startup \
 

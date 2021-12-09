@@ -5,8 +5,8 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/audio.c \
 ../Src/bsp_override.c \
+../Src/fft.c \
 ../Src/filter.c \
 ../Src/init.c \
 ../Src/main.c \
@@ -15,13 +15,11 @@ C_SRCS += \
 ../Src/uart.c \
 ../Src/ui.c \
 ../Src/usb.c \
-../Src/usbd_audio_if.c \
-../Src/usbd_conf.c \
-../Src/usbd_desc.c 
+../Src/user_audio.c 
 
 OBJS += \
-./Src/audio.o \
 ./Src/bsp_override.o \
+./Src/fft.o \
 ./Src/filter.o \
 ./Src/init.o \
 ./Src/main.o \
@@ -30,13 +28,11 @@ OBJS += \
 ./Src/uart.o \
 ./Src/ui.o \
 ./Src/usb.o \
-./Src/usbd_audio_if.o \
-./Src/usbd_conf.o \
-./Src/usbd_desc.o 
+./Src/user_audio.o 
 
 C_DEPS += \
-./Src/audio.d \
 ./Src/bsp_override.d \
+./Src/fft.d \
 ./Src/filter.d \
 ./Src/init.d \
 ./Src/main.d \
@@ -45,12 +41,10 @@ C_DEPS += \
 ./Src/uart.d \
 ./Src/ui.d \
 ./Src/usb.d \
-./Src/usbd_audio_if.d \
-./Src/usbd_conf.d \
-./Src/usbd_desc.d 
+./Src/user_audio.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 Src/%.o: ../Src/%.c Src/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 '-D__weak=__attribute__((weak))' '-D__packed="__attribute__((__packed__))"' -DUSE_HAL_DRIVER -DSTM32F769xx -c -I../Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../Drivers/BSP/STM32F769I-Discovery -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/FatFs/src" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Class/AUDIO/Inc" -Og -ffunction-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m7 -std=gnu11 -g3 '-D__weak=__attribute__((weak))' -DUSE_HAL_DRIVER -DUSE_AUDIO_DFSDM_MEMS_MIC=1 -DSTM32F769xx -DUSE_STM32F769I_DISCO -DUSE_IOEXPANDER -DUSE_USB_FS -DUSE_USB_FS_INTO_HS -DUSE_USB_AUDIO_RECORDING=1 -DUSE_USB_AUDIO_PLAYBACK=1 -DUSB_DEVICE_ENABLE '-D__packed="__attribute__((__packed__))"' -c -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/Utilities/JPEG" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/FatFs/src" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/FatFs/src/drivers" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Core/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/USBConf/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/Common/Streaming/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/BSP/Components/wm8994_ex" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/STM32_USB_Device_Library/Class/AUDIO_10/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/STM32F7xx_HAL_Driver/Inc" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/BSP/STM32F769I-Discovery" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/CMSIS/Include" -I"C:/Users/mchonaker/Documents/Projects/RPI-CLASSES/FALL 2021/ECSE 4790/workspace/mps_final_project_eq/Drivers/BSP/Components/Common" -Og -ffunction-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 

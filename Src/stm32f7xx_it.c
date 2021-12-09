@@ -73,14 +73,19 @@ void DMA2_Stream1_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 
 
+#ifdef USE_USB_FS_INTO_HS
+void OTG_HS_IRQHandler(void)
+#else
 #ifdef USE_USB_FS
 void OTG_FS_IRQHandler(void)
 #else
 void OTG_HS_IRQHandler(void)
 #endif
+#endif
 {
   HAL_PCD_IRQHandler(&hpcd);
 }
+
 
 /**
   * @brief This function handles DMA2 Stream 5 interrupt request.
@@ -91,6 +96,7 @@ void DMA2_Stream6_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
 }
+
 
 
 

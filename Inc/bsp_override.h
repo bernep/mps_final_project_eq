@@ -11,6 +11,7 @@
 #include "stm32f769i_discovery.h"
 #include "stm32f769i_discovery_audio.h"
 #include "main.h"
+#include "audio.h"
 #include "stm32f7xx_hal.h"
 
 typedef enum

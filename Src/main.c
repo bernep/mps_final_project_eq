@@ -8,7 +8,7 @@
 #include "stm32f7xx_hal.h"
 #include "uart.h"
 #include "usb.h"
-#include "audio.h"
+#include "user_audio.h"
 #include "filter.h"
 #include "bsp_override.h"
 #include "stm32f769i_discovery.h"

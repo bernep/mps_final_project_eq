@@ -10,16 +10,18 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include startup/subdir.mk
+-include USBConf/Src/subdir.mk
 -include Src/subdir.mk
 -include Drivers/Utilities/Log/subdir.mk
 -include Drivers/Utilities/JPEG/subdir.mk
 -include Drivers/STM32_USB_Device_Library/Core/Src/subdir.mk
--include Drivers/STM32_USB_Device_Library/Class/AUDIO/Src/subdir.mk
+-include Drivers/STM32_USB_Device_Library/Class/AUDIO_10/Src/subdir.mk
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
 -include Drivers/FatFs/src/drivers/subdir.mk
 -include Drivers/FatFs/src/subdir.mk
+-include Drivers/Common/Streaming/Src/subdir.mk
 -include Drivers/BSP/STM32F769I-Discovery/subdir.mk
--include Drivers/BSP/Components/wm8994/subdir.mk
+-include Drivers/BSP/Components/wm8994_ex/subdir.mk
 -include Drivers/BSP/Components/otm8009a/subdir.mk
 -include Drivers/BSP/Components/ft6x06/subdir.mk
 -include Drivers/BSP/Components/adv7533/subdir.mk

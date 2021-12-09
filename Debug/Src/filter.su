@@ -1,2 +1,4 @@
-filter.c:109:5:Calc_FX1_Sample	0	static
-filter.c:103:6:Calc_FX1_Buffer	16	static
+filter.c:19:6:FX1	4	static
+filter.c:26:6:FX2	4	static
+filter.c:34:6:FX3	4	static
+filter.c:41:6:FX4	0	static
